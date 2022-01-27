@@ -17,6 +17,10 @@ keypoints:
 - "Hill numbers are linear while original alpha diversicy index values are not."
 ---
 
+>## Prerequisites: 
+> What do the results of each index tell you about the diversity of the microbial community in each sample??
+{: .prereq}
+
 ## Pre-requisites
 
 - R packages:
