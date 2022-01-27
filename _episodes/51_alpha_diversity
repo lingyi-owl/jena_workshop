@@ -6,7 +6,6 @@ questions:
 - "What is alpha diversity?"
 - "How to compare alpha diversity between samples"
 - "What are the common alpha diversity indices?"
-
 objectives:
 - "Run a cross-assembly with all the samples."
 - "Understand the parameters used during the cross-assembly."
