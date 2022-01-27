@@ -1,17 +1,17 @@
 ---
 title: "Alpha diversity"
-teaching: 15
-exercises: 0
+teaching: 30
+exercises: 60
 questions:
-- "alpha diversity (FIXME)"
-objectives of theory:
-- "1. Calculating alpha diversity with phyloseq and DivNet.
-  2. Interpreting alpha diversity measures.
-  3. Statistical comparison of alpha diversity indices.
-  4. Extracting data from R objects.
-  5. Using ggplot2."
+- "What is alpha diversity?"
+- "What are the common alpha diversity indices?"
+- "How to compare alpha diversity between samples"
+objectives:
+- "Run alpha diversity analysis using DivNet."
+- "Transform alpha diversity indice values into hill numbers and compare them between samples."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
+- "Hill numbers are linear while original alpha diversicy index values are not."
 ---
 
 ## Pre-requisites
