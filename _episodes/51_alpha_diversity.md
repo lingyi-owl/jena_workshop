@@ -67,7 +67,7 @@ again because we will actually be using the phyloseq package to calculate some o
 the diversity metrics
 ~~~
 ```{r}
-counts <- read.table("asv_count_table.tsv",
+counts <- read.table("bin_count_table.tsv",
 sep = "\t",
 header = TRUE,
 row.names = 1)
@@ -80,8 +80,8 @@ sample_data <- read.table("sample_metadata.txt",
 sep = "\t",
 header = TRUE,
 row.names = 2)
-# phylogenetic tree of ASVs
-tree <- read_tree("asv_FastTree.newick")
+# phylogenetic tree of bins
+tree <- read_tree("bin_FastTree.newick")
 ```
 ~~~
 
@@ -91,16 +91,39 @@ Unlike ordination and beta diversity, alpha diversity is a within-sample measure
 independent from other samples (although you could choose to pool samples by
 categories).
 
-create a phyloseq object
+Create a phyloseq object
 ~~~
 ```{r}
 # make a and save phyloseq object
-pond_phyloseq <- phyloseq(
+crass_phyloseq <- phyloseq(
 otu_table(counts, taxa_are_rows = T),
 tax_table(as.matrix(taxonomy)),
 sample_data(sample_data)
 )
-save(pond_phyloseq, file = "pond_phyloseq.Rdata")
+save(crass_phyloseq, file = "crass_phyloseq.Rdata")
 ~~~
 
+Make alpha diversity plots
+~~~
+```{r}
+# make and store a plot of observed otus in each sample
+# plot_richness() outputs a ggplot plot object
+observed_otus_plot <- plot_richness(pond_phyloseq,
+# map sample to the x-axis
+x = "Sample",
+# measure alpha div using observed otus
+measures = c("Observed"),
+# color the points by month
+color = "Month",
+# give points different shapes based on size fraction
+shape = "Fraction") +
+# make the points on the chart size 3 (default is 1)
+geom_point(size = 3) +
+# ggplot themes: https://ggplot2.tidyverse.org/reference/ggtheme.html
+theme_bw() +
+# rotate the text axis 90  counterclockwise
+theme(axis.text.x = element_text(angle = 90)) +
+# change the y-axis title
+labs(y = "Observed ASVs")
+~~~
 {% include links.md %}
