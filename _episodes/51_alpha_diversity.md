@@ -47,4 +47,9 @@ remotes::install_github("adw96/breakaway")
 remotes::install_github("adw96/DivNet")
 ~~~
 
+## Load packages
+Load the ASV table, taxonomy table, and sample metadata using the read.table()
+function. Use read_tree() to import the phylogenetic tree. We’re loading the data
+again because we will actually be using the phyloseq package to calculate some of
+the diversity metrics
 {% include links.md %}
