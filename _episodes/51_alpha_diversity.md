@@ -106,7 +106,7 @@ sample_data(sample_data)
 save(crass_phyloseq, file = "crass_phyloseq.Rdata")
 ~~~
 
-Plot alpha diversity using measures from phyloseq
+#### Plot alpha diversity using measures from phyloseq
 ~~~
 ```{r}
 observed_otus_plot <- plot_richness(pond_phyloseq,
@@ -124,7 +124,7 @@ labs(y = "Observed ASVs")
 > Change the value in "measures" to plot Chao1, Shannon and Simpson.
 {: .challenge}
 
-Plot alpha diversity using Hill Numbers
+#### Plot alpha diversity using Hill Numbers
 ~~~
 ```{r}
 shannon <- estimate_richness(crass_phyloseq,
@@ -158,7 +158,7 @@ scale_x_discrete(limits = sample_order)
 > 6. make and store a ggplot of the Simpson Hill numbers
 {: .challenge}
 
-Arrange all 6 plots on a single grid
+#### Arrange all 6 plots on a single grid
 You should run that last bit of code (the grid.arrange()) in the R console to get the
 plots to appear in the plots tab. From there, you can use the zoom feature to open up
 the plots in a new, bigger window.
