@@ -19,10 +19,10 @@ keypoints:
 
 ## Pre-requisites
 
-R packages:
-- phyloseq
-- ggplot2
-- gridExtra
+- R packages:
+-- phyloseq
+-- ggplot2
+-- gridExtra
 - magrittr
 - picante
 - DivNet
@@ -174,8 +174,8 @@ ncol = 2)
 ```
 ~~~
 
->## Discussion: Sample for the re-assembly
-> Look at the heatmap in `3_profiles/heatmap.png` and explain what you see. With which sample do you think it will be easier for the assembler to reconstruct the complete genome?
+>## Discussion: 
+> What do the results of each index tell you about the diversity of the microbial community in each sample??
 {: .discussion}
 
 {% include links.md %}
