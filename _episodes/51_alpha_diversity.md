@@ -156,7 +156,7 @@ scale_x_discrete(limits = sample_order)
 > 4. merge the hill numbers with the sample metadata based on rownames.
 > 5. change the name of the column from Simpson to Hill.
 > 6. make and store a ggplot of the Simpson Hill numbers
-> {: .challenge}
+{: .challenge}
 
 Arrange all 6 plots on a single grid
 You should run that last bit of code (the grid.arrange()) in the R console to get the
