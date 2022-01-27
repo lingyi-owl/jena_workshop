@@ -1,5 +1,5 @@
 ---
-title: "Tracking ecological dynamics of viruses using compositional data analysis"
+title: "Alpha diversity"
 teaching: 15
 exercises: 0
 questions:
