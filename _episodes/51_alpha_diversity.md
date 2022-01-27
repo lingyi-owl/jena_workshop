@@ -153,6 +153,11 @@ scale_x_discrete(limits = sample_order)
 > ~~~
 > simpson <-
 > ~~~
-{: .challenge}
+> 2. calculate Hill numbers and convert to a matrix.
+> the formula for Hill numbers from Simpson is 1/(1-D).
+> 3. give the hill_simpson matrix some row names
+> 4. merge the hill numbers with the sample metadata based on rownames
+> change the name of the column from Simpson to Hill
+> {: .challenge}
 
 {% include links.md %}
