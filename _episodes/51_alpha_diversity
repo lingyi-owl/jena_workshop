@@ -10,9 +10,7 @@ objectives:
 - "Run alpha diversity analysis using DivNet."
 - "Transform alpha diversity indice values into hill numbers and compare them between samples."
 
-## Prerequisites
 
-{: .prereq}
 
 keypoints:
 - "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
@@ -20,3 +18,6 @@ keypoints:
 ---
 
 
+## Prerequisites
+
+{: .prereq}
