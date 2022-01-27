@@ -107,7 +107,6 @@ save(crass_phyloseq, file = "crass_phyloseq.Rdata")
 ~~~
 
 Make alpha diversity plots
-Change the value in "measures" to plot Chao1, Shannon and Simpson.
 ~~~
 ```{r}
 observed_otus_plot <- plot_richness(pond_phyloseq,
@@ -121,8 +120,8 @@ theme(axis.text.x = element_text(angle = 90)) +
 labs(y = "Observed ASVs")
 ~~~
 
->## Challenge: BLAST one of the scaffolds
-> BLAST (Basic Local Alignment Search Tool) has become so important in bioinformatics that has its own verb, _to blast_ something. In its [online version](https://blast.ncbi.nlm.nih.gov/Blast.cgi) you can check if there is any sequence similar to your scaffolds in the public databases. Choose one of them and _blast_ it. Is there any hit? If so, to which organism?
+>## Challenge: Make alpha diversity plots of Chao1, Shannon, and Simpson
+> Change the value in "measures" to plot Chao1, Shannon and Simpson.
 {: .challenge}
 
 Calculate Hill numbers and convert to a matrix
