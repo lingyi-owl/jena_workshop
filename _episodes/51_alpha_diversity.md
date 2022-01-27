@@ -18,12 +18,7 @@ keypoints:
 ---
 
 >## Prerequisites: 
-> What do the results of each index tell you about the diversity of the microbial community in each sample??
-{: .prereq}
-
-## Pre-requisites
-
-- R packages:
+> - R packages:
   - phyloseq
   - ggplot2
   - gridExtra
@@ -31,7 +26,7 @@ keypoints:
   - picante
   - DivNet
   - reshape2
-
+{: .prereq}
 
 ## Set up an R Notebook
 Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
