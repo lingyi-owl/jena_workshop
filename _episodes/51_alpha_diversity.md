@@ -26,7 +26,6 @@ keypoints:
 - DivNet
 - reshape2
 
-{% include links.md %}
 
 ## Set up an R Notebook
 Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
@@ -40,3 +39,7 @@ install.packages("BiocManager")
 library(BiocManager)
 BiocManager::install("phyloseq")
 ~~~
+
+
+
+{% include links.md %}
