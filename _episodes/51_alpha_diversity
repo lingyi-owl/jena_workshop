@@ -10,16 +10,8 @@ objectives:
 - "Run alpha diversity analysis using DivNet."
 - "Transform alpha diversity indice values into hill numbers and compare them between samples."
 
-> ## prereq
->
-> text
-> text
-> text
->
-> ~~~
-> code
-> ~~~
-> {: .source}
+## Prerequisites
+
 {: .prereq}
 
 keypoints:
