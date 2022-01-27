@@ -18,14 +18,13 @@ keypoints:
 
 ● Completion of “Getting started” and its prerequisites
 - R packages:
-- ○
 - phyloseq
-- ○ ggplot2
-- ○ gridExtra
-- ○ magrittr
-- ○ picante
-- ○ DivNet
-- ○ reshape2
+- ggplot2
+- gridExtra
+- magrittr
+- picante
+- DivNet
+- reshape2
 
 {% include links.md %}
 
