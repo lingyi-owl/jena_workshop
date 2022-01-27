@@ -9,7 +9,19 @@ questions:
 objectives:
 - "Run alpha diversity analysis using DivNet."
 - "Transform alpha diversity indice values into hill numbers and compare them between samples."
-prereq:
+
+> ## prereq
+>
+> text
+> text
+> text
+>
+> ~~~
+> code
+> ~~~
+> {: .source}
+{: .prereq}
+
 keypoints:
 - "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
 - "Hill numbers are linear while original alpha diversicy index values are not."
