@@ -87,7 +87,7 @@ tree <- read_tree("bin_FastTree.newick")
 ```
 ~~~
 
-## Alpha diversity
+## Alpha diversity with phlyloseq
 Alpha diversity metrics measure species richness and evenness within samples.
 Unlike ordination and beta diversity, alpha diversity is a within-sample measure that is
 independent from other samples (although you could choose to pool samples by
@@ -209,4 +209,5 @@ can use an ANOVA to tell if there are significant differences in sample alpha di
 based on the categorical data (i.e. month, size fraction). If our data does not meet the
 assumptions, we can use a Kruskal-Wallis test instead.
 
+## Alpha diversity with Divnet
 {% include links.md %}
