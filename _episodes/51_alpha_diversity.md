@@ -28,3 +28,7 @@ keypoints:
 
 {% include links.md %}
 
+## Set up an R Notebook
+Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
+and add fields for author and date. Save your new notebook in the same directory as
+the rest of your workshop materials (e.g. micro_workshop/ag_pond/).
