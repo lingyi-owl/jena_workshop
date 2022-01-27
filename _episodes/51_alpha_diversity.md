@@ -4,7 +4,7 @@ teaching: 30
 exercises: 60
 questions:
 - "What is alpha diversity?"
-- "What are the common alpha diversity indices?"
+- "What common alpha diversity indices are there?"
 - "How to compare alpha diversity between samples"
 objectives:
 - "Run alpha diversity analysis using DivNet."
@@ -91,8 +91,16 @@ Unlike ordination and beta diversity, alpha diversity is a within-sample measure
 independent from other samples (although you could choose to pool samples by
 categories).
 
-## With phyloseq
-I'm going to use the phyloseq package here because it can be convenient for things
-like plotting, though alpha diversity metrics are generally simple to calculate using
-only base R functions.
+create a phyloseq object
+~~~
+```{r}
+# make a and save phyloseq object
+pond_phyloseq <- phyloseq(
+otu_table(counts, taxa_are_rows = T),
+tax_table(as.matrix(taxonomy)),
+sample_data(sample_data)
+)
+save(pond_phyloseq, file = "pond_phyloseq.Rdata")
+~~~
+
 {% include links.md %}
