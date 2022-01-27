@@ -32,3 +32,11 @@ keypoints:
 Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
 and add fields for author and date. Save your new notebook in the same directory as
 the rest of your workshop materials (e.g. Viriomic-Workshop/day5_ecology/).
+
+## Installing packages
+Installing phyloseq
+~~~
+install.packages("BiocManager")
+library(BiocManager)
+BiocManager::install("phyloseq")
+~~~
