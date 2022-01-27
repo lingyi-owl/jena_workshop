@@ -1,5 +1,4 @@
 ---
-start: True
 title: "Tracking ecological dynamics of viruses using compositional data analysis"
 teaching: 15
 exercises: 0
