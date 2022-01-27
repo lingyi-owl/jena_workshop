@@ -11,7 +11,7 @@ objectives:
 - "Transform alpha diversity indice values into hill numbers and compare them between samples."
 keypoints:
 - "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
-- "Hill numbers are linear while original alpha diversicy index values are not"
+- "Hill numbers are linear while original alpha diversicy index values are not."
 ---
 
 
