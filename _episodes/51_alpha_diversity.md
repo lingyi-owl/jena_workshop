@@ -179,7 +179,7 @@ ncol = 2)
 ~~~
 
 >## Discussion: 
-> What do the results of each index tell you about the diversity of the microbial community in each sample?
+> What do the results of each index tell you about the diversity of the microbial community in each sample
 {: .discussion}
 
 
