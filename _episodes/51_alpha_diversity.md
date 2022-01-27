@@ -159,6 +159,9 @@ scale_x_discrete(limits = sample_order)
 > {: .challenge}
 
 Arrange all 6 plots on a single grid
+You should run that last bit of code (the grid.arrange()) in the R console to get the
+plots to appear in the plots tab. From there, you can use the zoom feature to open up
+the plots in a new, bigger window.
 ~~~
 ```{r}
 grid.arrange(observed_otus_plot,
@@ -170,4 +173,9 @@ hill_simpson_plot,
 ncol = 2)
 ```
 ~~~
+
+>## Discussion: Sample for the re-assembly
+> Look at the heatmap in `3_profiles/heatmap.png` and explain what you see. With which sample do you think it will be easier for the assembler to reconstruct the complete genome?
+{: .discussion}
+
 {% include links.md %}
