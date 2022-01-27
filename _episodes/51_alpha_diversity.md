@@ -28,12 +28,14 @@ keypoints:
   - reshape2
 {: .prereq}
 
-## Set up an R Notebook
+## Set up
+
+#### Set up an R Notebook
 Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
 and add fields for author and date. Save your new notebook in the same directory as
 the rest of your workshop materials (e.g. Viriomic-Workshop/day5_ecology/).
 
-## Installing packages
+#### Installing packages
 Installing phyloseq
 ~~~
 install.packages("BiocManager")
@@ -49,7 +51,7 @@ remotes::install_github("adw96/breakaway")
 remotes::install_github("adw96/DivNet")
 ~~~
 
-## Load packages
+#### Load packages
 Create a new R code chunk and load required packages using library().
 ~~~
 ```{r}
@@ -62,7 +64,7 @@ library(DivNet)
 library(reshape2)
 ```
 ~~~
-## Load data
+#### Load data
 Load the ASV table, taxonomy table, and sample metadata using the read.table()
 function. Use read_tree() to import the phylogenetic tree. We’re loading the data
 again because we will actually be using the phyloseq package to calculate some of
