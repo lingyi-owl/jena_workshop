@@ -16,8 +16,8 @@ keypoints:
 
 ## Pre-requisites
 
-● Completion of “Getting started” and its prerequisites
-● R packages:
+-● Completion of “Getting started” and its prerequisites
+-● R packages:
 - phyloseq
 - ggplot2
 - gridExtra
