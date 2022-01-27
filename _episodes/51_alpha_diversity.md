@@ -7,8 +7,11 @@ questions:
 - "What common alpha diversity indices are there?"
 - "How to compare alpha diversity between samples"
 objectives:
-- "Run alpha diversity analysis using DivNet."
-- "Transform alpha diversity indice values into hill numbers and compare them between samples."
+- "Running alpha diversity analysis using phyloseq DivNet."
+- "Interpreting alpha diversity measures."
+- "Statistical comparison of diversity indices usign hill numbers."
+- "Extracting data from R objects."
+- "Using ggplot2."
 keypoints:
 - "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
 - "Hill numbers are linear while original alpha diversicy index values are not."
@@ -104,6 +107,7 @@ save(crass_phyloseq, file = "crass_phyloseq.Rdata")
 ~~~
 
 Make alpha diversity plots
+Change the value in "measures" to plot Chao1, Shannon and Simpson.
 ~~~
 ```{r}
 observed_otus_plot <- plot_richness(pond_phyloseq,
@@ -117,5 +121,14 @@ theme(axis.text.x = element_text(angle = 90)) +
 labs(y = "Observed ASVs")
 ~~~
 
-Change the value in "measures" to plot Chao1, Shannon and Simpson.
+Calculate Hill numbers and convert to a matrix
+~~~
+```{r}
+shannon <- estimate_richness(crass_phyloseq,
+measures = c("Shannon"))
+hill_shannon <- sapply(shannon, function(x) {exp(x)}) %>% as.matrix()
+row.names(hill_shannon) <- row.names(shannon)
+hill_shannon_meta <- merge(hill_shannon, sample_data, by =
+"row.names")
+~~~
 {% include links.md %}
