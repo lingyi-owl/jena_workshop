@@ -106,7 +106,7 @@ sample_data(sample_data)
 save(crass_phyloseq, file = "crass_phyloseq.Rdata")
 ~~~
 
-Make alpha diversity plots
+Plot alpha diversity using measures from phyloseq
 ~~~
 ```{r}
 observed_otus_plot <- plot_richness(pond_phyloseq,
@@ -124,7 +124,7 @@ labs(y = "Observed ASVs")
 > Change the value in "measures" to plot Chao1, Shannon and Simpson.
 {: .challenge}
 
-Calculate Hill numbers and convert to a matrix
+Plot alpha diversity using Hill Numbers
 ~~~
 ```{r}
 shannon <- estimate_richness(crass_phyloseq,
@@ -147,4 +147,9 @@ labs(title = "Effective Shannon Diversity Index",
 y = "Effective number of species") +
 scale_x_discrete(limits = sample_order)
 ~~~
+
+>## Challenge: Plot alpha diversity using Hill Numbers from Simpson
+> 1. get the simpson index values from the phyloseq object and convert to a matrix.
+{: .challenge}
+
 {% include links.md %}
