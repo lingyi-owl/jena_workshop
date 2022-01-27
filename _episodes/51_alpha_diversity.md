@@ -5,7 +5,7 @@ exercises: 60
 questions:
 - "What is alpha diversity?"
 - "What common alpha diversity indices are there?"
-- "How to compare alpha diversity between samples"
+- "How to compare alpha diversity between samples?"
 objectives:
 - "Running alpha diversity analysis using phyloseq DivNet."
 - "Interpreting alpha diversity measures."
