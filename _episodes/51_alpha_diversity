@@ -3,7 +3,7 @@ title: "Alpha diversity"
 teaching: 15
 exercises: 0
 questions:
-- "alpha diversity (FIXME)"
+- "What is alpha diversity?"
 
 ~~~
 install.packages(“remotes”)
