@@ -183,6 +183,25 @@ PD (phylogenetic distance) is one such measure and is equal to the sum of the
 lengths of the branches of all members of a sample (or other group) on a phylogeny.
 We can calculate it using the `pd` function from the package picante.
 
+~~~
+```{r}
+faiths <- pd(t(counts), # samples should be rows, ASVs as columns
+tree,
+include.root = F) # our tree is not rooted
+faiths_meta <- merge(faiths, sample_data, by = "row.names")
+faiths_plot <- ggplot(data = faiths_meta) +
+geom_point(aes(x = Sample,
+y = PD,
+color = Month,
+shape = Fraction),
+size = 3) +
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90)) +
+labs(title = "Faith's phylogenetic distance",
+y = "Faith's PD")
+faiths_plot
+```
+~~~
 
 
 {% include links.md %}
