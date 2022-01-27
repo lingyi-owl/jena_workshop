@@ -27,3 +27,5 @@ keypoints:
 - ○ picante
 - ○ DivNet
 - ○ reshape2
+
+{% include links.md %}
