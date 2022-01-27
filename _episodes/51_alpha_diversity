@@ -4,14 +4,14 @@ teaching: 30
 exercises: 60
 questions:
 - "What is alpha diversity?"
-- "How to compare alpha diversity between samples"
 - "What are the common alpha diversity indices?"
+- "How to compare alpha diversity between samples"
 objectives:
-- "Run a cross-assembly with all the samples."
-- "Understand the parameters used during the cross-assembly."
+- "Run alpha diversity analysis using DivNet."
+- "Transform alpha diversity indice values into hill numbers and compare them between samples."
 keypoints:
-- "With sequence assembly we get longer, more meaningful genomic fragments from short sequencing reads."
-- "In a cross-assembly, reads coming from the same species in different samples are merged into the same scaffold."
+- "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
+- "Hill numbers are linear while original alpha diversicy index values are not"
 ---
 
 
