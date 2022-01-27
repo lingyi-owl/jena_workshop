@@ -106,24 +106,14 @@ save(crass_phyloseq, file = "crass_phyloseq.Rdata")
 Make alpha diversity plots
 ~~~
 ```{r}
-# make and store a plot of observed otus in each sample
-# plot_richness() outputs a ggplot plot object
 observed_otus_plot <- plot_richness(pond_phyloseq,
-# map sample to the x-axis
 x = "Sample",
-# measure alpha div using observed otus
 measures = c("Observed"),
-# color the points by month
 color = "Month",
-# give points different shapes based on size fraction
 shape = "Fraction") +
-# make the points on the chart size 3 (default is 1)
 geom_point(size = 3) +
-# ggplot themes: https://ggplot2.tidyverse.org/reference/ggtheme.html
 theme_bw() +
-# rotate the text axis 90  counterclockwise
 theme(axis.text.x = element_text(angle = 90)) +
-# change the y-axis title
 labs(y = "Observed ASVs")
 ~~~
 {% include links.md %}
