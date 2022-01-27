@@ -1,10 +1,12 @@
 ---
-title: "Cross-assembly"
-teaching: 15
-exercises: 20
+title: "Alpha diversity"
+teaching: 30
+exercises: 60
 questions:
-- "What is a sequence assembly?"
-- "How is different a cross-assembly from a normal assembly?"
+- "What is alpha diversity?"
+- "How to compare alpha diversity between samples"
+- "What are the common alpha diversity indices?"
+
 objectives:
 - "Run a cross-assembly with all the samples."
 - "Understand the parameters used during the cross-assembly."
