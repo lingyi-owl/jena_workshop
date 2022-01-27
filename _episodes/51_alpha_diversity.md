@@ -48,8 +48,43 @@ remotes::install_github("adw96/DivNet")
 ~~~
 
 ## Load packages
+Create a new R code chunk and load required packages using library().
+~~~
+```{r}
+library(phyloseq)
+library(ggplot2)
+library(gridExtra)
+library(magrittr)
+library(picante)
+library(DivNet)
+library(reshape2)
+```
+~~~
+## Load data
 Load the ASV table, taxonomy table, and sample metadata using the read.table()
 function. Use read_tree() to import the phylogenetic tree. We’re loading the data
 again because we will actually be using the phyloseq package to calculate some of
 the diversity metrics
+~~~
+```{r}
+counts <- read.table("asv_count_table.tsv",
+sep = "\t",
+header = TRUE,
+row.names = 1)
+taxonomy <- read.table("taxonomy_columns.txt",
+sep = "\t",
+header = TRUE,
+row.names = 1,
+na.strings = c("", "NA"))
+sample_data <- read.table("sample_metadata.txt",
+sep = "\t",
+header = TRUE,
+row.names = 2)
+# phylogenetic tree of ASVs
+tree <- read_tree("asv_FastTree.newick")
+```
+~~~
+
+
+
 {% include links.md %}
