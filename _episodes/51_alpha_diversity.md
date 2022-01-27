@@ -150,6 +150,9 @@ scale_x_discrete(limits = sample_order)
 
 >## Challenge: Plot alpha diversity using Hill Numbers from Simpson
 > 1. get the simpson index values from the phyloseq object and convert to a matrix.
+> ~~~
+> simpson <-
+> ~~~
 {: .challenge}
 
 {% include links.md %}
