@@ -39,6 +39,12 @@ library(BiocManager)
 BiocManager::install("phyloseq")
 ~~~
 
-
+Installing DivNet
+~~~
+install.packages(“remotes”)
+library(remotes)
+remotes::install_github("adw96/breakaway")
+remotes::install_github("adw96/DivNet")
+~~~
 
 {% include links.md %}
