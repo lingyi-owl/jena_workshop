@@ -94,7 +94,7 @@ Unlike ordination and beta diversity, alpha diversity is a within-sample measure
 independent from other samples (although you could choose to pool samples by
 categories).
 
-Create a phyloseq object
+###Create a phyloseq object
 ~~~
 ```{r}
 # make a and save phyloseq object
