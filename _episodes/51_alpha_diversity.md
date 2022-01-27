@@ -130,5 +130,18 @@ hill_shannon <- sapply(shannon, function(x) {exp(x)}) %>% as.matrix()
 row.names(hill_shannon) <- row.names(shannon)
 hill_shannon_meta <- merge(hill_shannon, sample_data, by =
 "row.names")
+colnames(hill_shannon_meta)[colnames(hill_shannon_meta) == "Shannon"]
+<- "Hill"
+hill_shannon_plot <- ggplot(data = hill_shannon_meta) +
+geom_point(aes(x = Sample,
+y = Hill,
+color = Month,
+shape = Fraction),
+size = 3) +
+theme_bw() +
+theme(axis.text.x = element_text(angle = 90)) +
+labs(title = "Effective Shannon Diversity Index",
+y = "Effective number of species") +
+scale_x_discrete(limits = sample_order)
 ~~~
 {% include links.md %}
