@@ -116,4 +116,6 @@ theme_bw() +
 theme(axis.text.x = element_text(angle = 90)) +
 labs(y = "Observed ASVs")
 ~~~
+
+Change the value in "measures" to plot Chao1, Shannon and Simpson.
 {% include links.md %}
