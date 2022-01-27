@@ -85,6 +85,14 @@ tree <- read_tree("asv_FastTree.newick")
 ```
 ~~~
 
+## Alpha diversity
+Alpha diversity metrics measure species richness and evenness within samples.
+Unlike ordination and beta diversity, alpha diversity is a within-sample measure that is
+independent from other samples (although you could choose to pool samples by
+categories).
 
-
+## With phyloseq
+I'm going to use the phyloseq package here because it can be convenient for things
+like plotting, though alpha diversity metrics are generally simple to calculate using
+only base R functions.
 {% include links.md %}
