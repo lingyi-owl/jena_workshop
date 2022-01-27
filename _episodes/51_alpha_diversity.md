@@ -24,13 +24,13 @@ keypoints:
 ## Pre-requisites
 
 - R packages:
--- phyloseq
--- ggplot2
--- gridExtra
-- magrittr
-- picante
-- DivNet
-- reshape2
+  - phyloseq
+  - ggplot2
+  - gridExtra
+  - magrittr
+  - picante
+  - DivNet
+  - reshape2
 
 
 ## Set up an R Notebook
@@ -179,7 +179,9 @@ ncol = 2)
 ~~~
 
 >## Discussion: 
-> What do the results of each index tell you about the diversity of the microbial community in each sample??
+> What do the results of each index tell you about the diversity of the microbial community in each sample?
 {: .discussion}
+
+
 
 {% include links.md %}
