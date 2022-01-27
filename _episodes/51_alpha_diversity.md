@@ -150,14 +150,24 @@ scale_x_discrete(limits = sample_order)
 
 >## Challenge: Plot alpha diversity using Hill Numbers from Simpson
 > 1. get the simpson index values from the phyloseq object and convert to a matrix.
-> ~~~
-> simpson <-
-> ~~~
 > 2. calculate Hill numbers and convert to a matrix.
 > the formula for Hill numbers from Simpson is 1/(1-D).
-> 3. give the hill_simpson matrix some row names
-> 4. merge the hill numbers with the sample metadata based on rownames
-> change the name of the column from Simpson to Hill
+> 3. give the hill_simpson matrix some row names.
+> 4. merge the hill numbers with the sample metadata based on rownames.
+> 5. change the name of the column from Simpson to Hill.
+> 6. make and store a ggplot of the Simpson Hill numbers
 > {: .challenge}
 
+Arrange all 6 plots on a single grid
+~~~
+```{r}
+grid.arrange(observed_otus_plot,
+chao1_plot,
+shannon_plot,
+simpson_plot,
+hill_shannon_plot,
+hill_simpson_plot,
+ncol = 2)
+```
+~~~
 {% include links.md %}
