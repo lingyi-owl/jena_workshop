@@ -179,8 +179,14 @@ ncol = 2)
 ~~~
 
 >## Discussion: 
-> What do the results of each index tell you about the diversity of the microbial community in each sample
+> What do the results of each index tell you about the diversity of the microbial community in each sample?
 {: .discussion}
+
+#### Plot alpha diversity using phylogenetic information
+Phylogenetic trees can also be taken into account when measuring diversity. Faith's
+PD (phylogenetic distance) is one such measure and is equal to the sum of the
+lengths of the branches of all members of a sample (or other group) on a phylogeny.
+We can calculate it using the `pd` function from the package picante.
 
 
 
