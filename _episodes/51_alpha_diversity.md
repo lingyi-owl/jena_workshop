@@ -7,7 +7,7 @@ questions:
 - "What common alpha diversity indices are there?"
 - "How to compare alpha diversity between samples?"
 objectives:
-- "Running alpha diversity analysis using phyloseq DivNet."
+- "Running alpha diversity analysis using phyloseq & DivNet."
 - "Interpreting alpha diversity measures."
 - "Statistical comparison of diversity indices usign hill numbers."
 - "Extracting data from R objects."
