@@ -1,9 +1,9 @@
 ---
-title: "Alpha diversity"
-teaching: 30
+title: "Beta diversity"
+teaching: 60
 exercises: 60
 questions:
-- "What is alpha diversity?"
+- "What is beta diversity?"
 - "What common alpha diversity indices are there?"
 - "How to compare alpha diversity between samples?"
 objectives:
