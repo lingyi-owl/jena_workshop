@@ -4,13 +4,13 @@ teaching: 60
 exercises: 60
 questions:
 - "What is beta diversity?"
-- "What common alpha diversity indices are there?"
-- "How to compare alpha diversity between samples?"
+- "How to compare beta diversity between samples?"
 objectives:
-- "Running alpha diversity analysis using phyloseq DivNet."
-- "Interpreting alpha diversity measures."
-- "Statistical comparison of diversity indices usign hill numbers."
-- "Extracting data from R objects."
+- "Replacing zeros with zCompositions."
+- "Centered log-ratio transformation of the count table."
+- "Calculating distance/dissimilarity measures with base R, vegan, and phyloseq."
+- "Performing PCA with biplotr."
+- "Interpreting beta diversity measures through ordination."
 - "Using ggplot2."
 keypoints:
 - "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
@@ -19,13 +19,14 @@ keypoints:
 
 >## Prerequisites: 
 > - R packages:
-  - phyloseq
+  - FeatureTable
   - ggplot2
   - gridExtra
   - magrittr
-  - picante
-  - DivNet
-  - reshape2
+  - biplotr
+  - zCompositions
+  - vegan
+  - ggdendro
 {: .prereq}
 
 ## Set up
