@@ -211,5 +211,22 @@ can use an ANOVA to tell if there are significant differences in sample alpha di
 based on the categorical data (i.e. month, size fraction). If our data does not meet the
 assumptions, we can use a Kruskal-Wallis test instead.
 
+First, we’ll check to see if the Shannon Hill numbers meet the assumptions of an ANOVA. Then, we’ll run either the ANOVA or a Kruskal-Wallis test. 
+~~~
+```{r}
+# test for normal distribution of effective number of species values
+from Shannon
+hill_shannon_meta$Hill %>% shapiro.test()
+# plot distribution of effective number of species values
+hill_shannon_meta %>%
+ggplot() +
+geom_density(aes(x = Hill))
+# test for homogeneity of variances
+bartlett.test(Hill ~ interaction(Month, Fraction), data = hill_meta)
+# use an ANOVA to test for differences among categories
+anova_shannon_hill <- aov(Hill ~ Month*Fraction, data =
+hill_shannon_meta)
+summary(anova_shannon_hill)
+~~~
 ## Alpha diversity with Divnet
 {% include links.md %}
