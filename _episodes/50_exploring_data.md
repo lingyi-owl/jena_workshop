@@ -166,7 +166,7 @@ crass_ft$plot()
 First, let’s talk about the code and then we’ll get to the plot. We used the $ before to
 access parts of the FeatureTable object, but we can also use it to access functions. It’s
 similar to the %>% function from magrittr, in that it feeds the object preceding the $ to
-the following function. Here, we used the $ to apply the FeatureTable 'plot()' function
+the following function. Here, we used the $ to apply the FeatureTable plot() function
 to crass_ft. Keep in mind that the plot() function here is not the same as the base R
 plot() function. When applied to a FeatureTable object, $plot() is actually an alias
 for the function featuretable.plot()which is actually a ggplot2 wrapper. You’ll see
