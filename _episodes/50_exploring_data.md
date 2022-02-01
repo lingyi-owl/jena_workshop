@@ -108,4 +108,25 @@ FeatureTable makes it very easy to filter data and make abundance plots.
 
 #### Building and accessing a FeatureTable object
 First, let's make a FeatureTable object with our data:
+~~~
+```{r}
+pond_ft <- FeatureTable$new(t(counts), taxonomy, sample_data)
+```
+~~~
+This command puts the contig counts, taxonomy calls, and sample metadata into a
+feature table object, where they can be easily manipulated. The order of the data is
+important here. The t() function means "transpose". We used it here
+because FeatureTable expects the rows to be samples and the columns to be contigs.
+To get a summary of your FeatureTable object, use this command:
+~~~
+print(pond_ft)
+~~~
+
+Your summary should look like this:
+```{r}
+FeatureTable: 
+  data         -- 24 samples, 3796 features
+  feature_data -- 8 covariates
+  sample_data  -- 14 covariates
+```
 {% include links.md %}
