@@ -1,6 +1,6 @@
 ---
 start: True
-title: Exploring data
+title: "Exploring data"
 teaching: 30
 exercises:60
 questions:
