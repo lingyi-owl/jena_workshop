@@ -1,12 +1,17 @@
 ---
 start: True
 title: Exploring data
-teaching: 15
-exercises: 0
+teaching: 30
+exercises:60
 questions:
 - "set up the environment for analysis"
 keypoints:
-- "set up the environment for analysis"
+- "Using R Notebooks"
+- "Loading data and packages into R"
+- "Using the FeatureTable package"
+- "Saving R objects with save()"
+- "Plotting relative abundance"
+- "Filtering ASVs to exclude low-abundance features"
 ---
 
 >## Prerequisites: 
