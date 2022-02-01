@@ -41,4 +41,19 @@ date: "28/01/2022"
 output: html_notebook
 ---
 ~~~
+
+Save your new notebook in the same directory as the rest of your workshop materials
+(e.g. Viriomic-Workshop/day5_ecology/).
+
+## Load packages
+Create a new R code chunk either using a keyboard shortcut (Ctrl + Alt + I or
+MacOS: Cmd + Option + I) or the green insert button. Load required packages
+using the library() function. Here’s my code block:
+
+```{r}
+library(featuretable)
+library(ggplot2)
+library(gridExtra)
+library(magrittr)
+```
 {% include links.md %}
