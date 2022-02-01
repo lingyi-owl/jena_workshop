@@ -2,7 +2,7 @@
 start: True
 title: "Exploring data"
 teaching: 30
-exercises:60
+exercises: 60
 questions:
 - "set up the environment for analysis"
 keypoints:
