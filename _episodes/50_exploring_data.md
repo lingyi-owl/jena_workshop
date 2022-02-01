@@ -4,14 +4,14 @@ title: "Exploring data"
 teaching: 30
 exercises: 60
 questions:
-- "set up the environment for analysis."
-keypoints:
 - "Using R Notebooks."
 - "Loading data and packages into R."
 - "Using the FeatureTable package."
 - "Saving R objects with save()."
 - "Plotting relative abundance."
 - "Filtering ASVs to exclude low-abundance features."
+keypoints:
+- "Having a data structure would bring many benefits in a long term."
 ---
 
 >## Prerequisites: 
