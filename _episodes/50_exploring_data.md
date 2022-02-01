@@ -129,4 +129,32 @@ FeatureTable:
   feature_data -- 8 covariates
   sample_data  -- 14 covariates
 ```
+Make sure that the dimensions in the summary match correctly to the data! The data
+category is the contig count table, the feature_data is the taxonomy, and the sample_data is
+the sample metadata.
+You can also access specific pieces of your FeatureTable object using the $:
+```{r}
+crass_ft$data[1:5,1:5]
+```
+The above command will show you the first 5 rows and columns of the contig count table. Try
+on your own to view the first 5 rows of the feature_data, then the first 5 columns of the
+sample_data.
+
+#### Saving data
+R objects and other data can be saved as R objects to make them easy to use again
+later. We’re going to save the FeatureTable object now so we don’t have to build it
+again in later analysis.
+save(crass_ft, file = "data/crass_featuretable.Rdata")
+crass_featuretable.Rdata will be created in whichever directory your R Notebook is
+saved. You can save all types of Rdata, not just FeatureTable objects. It’s especially
+useful in collaboration so you’re not passing several documents back and forth.
+Later, when we want to use the FeatureTable again, use this command:
+load("data/crass_featuretable.Rdata")
+
+#### Abundance plots with FeatureTable
+Let's take a quick look at the data before we get started. Here's how you make a
+very basic plot of contig abundance in each sample:
+```{r}
+pond_ft$plot()
+```
 {% include links.md %}
