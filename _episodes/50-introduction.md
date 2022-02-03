@@ -16,5 +16,8 @@ keypoints:
 ## Compositional data and analysis
 
 ([Microbiome Datasets Are Compositional: And This Is Not Optional](https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full)) to find it out.
+
+([A field guide for the compositional analysis of any-omics data](https://pubmed.ncbi.nlm.nih.gov/31544212/))
+
 {% include links.md %}
 
