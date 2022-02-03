@@ -1,5 +1,4 @@
 ---
-start: True
 title: "Exploring data"
 teaching: 30
 exercises: 60
