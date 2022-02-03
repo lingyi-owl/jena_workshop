@@ -14,7 +14,7 @@ keypoints:
 ## Basic ecology
 
 ## Compositional data and analysis
-[Microbiome Datasets Are Compositional: And This Is Not Optional] https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full
 
+([Microbiome Datasets Are Compositional: And This Is Not Optional](https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full)) to find it out.
 {% include links.md %}
 
