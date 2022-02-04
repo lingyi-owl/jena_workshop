@@ -42,5 +42,10 @@ Compositionality
 - Estimating diversity in networked ecological communities [Amy D Willis et al Biostatistics 2022](https://academic.oup.com/biostatistics/article/23/1/207/5841114?login=true)
 - Hill number as a bacterial diversity measure framework with high-throughput sequence data [Sanghoon Kang et al nature 2016](https://www.nature.com/articles/srep38263) 
 
+## Differential abundance and correlations
+
+#### Reading:
+- Understanding sequencing data as compositions: an outlook and review [Thomas P Quinn et al bioinformatics 2018](https://academic.oup.com/bioinformatics/article/34/16/2870/4956011)
+- propr: An R-package for Identifying Proportionally Abundant Features Using Compositional Data Analysiss [Thomas P. Quinn et al Biostatistics 2022](https://www.nature.com/articles/s41598-017-16520-0)
 {% include links.md %}
 
