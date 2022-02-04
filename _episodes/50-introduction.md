@@ -8,10 +8,7 @@ questions:
 - "What is Hill Number?"
 objectives:
 - "Compositionality"
-  - "Definition: a D-part composition is positive real vector of D components describing the parts of some whole. It only carries relative information between the parts.
-  - "Three principles of compositional data (analysis): scale invariance, permutation invariance, subcompositional coherence  
 - "Hill number of alpha divesity"
-  - "Hill number is linear"
 keypoints:
 - "Next Generation Sequencing data is compositional and should be analyzed using compositional data analysis methods"
 - "Hill number is linear and more intuitive than original alpha diversity measures"
@@ -24,6 +21,13 @@ keypoints:
 
 ## Compositional data and analysis
 
+Compositionality
+- Definition: a D-part composition is positive real vector of D components describing the parts of some whole. It only carries relative information between the parts.
+- Three principles of compositional data (analysis)
+  - Scale invariance
+  - Permutation invariance
+  - Subcompositional coherence  
+ 
 #### Reading:
 - Microbiome Datasets Are Compositional: And This Is Not Optional ([Gregory B. Gloor et al fmicb 2017](https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full))
 - A field guide for the compositional analysis of any-omics data ([Thomas P Quinn et al GigaScience 2019](https://pubmed.ncbi.nlm.nih.gov/31544212/))
