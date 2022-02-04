@@ -50,6 +50,17 @@ output: html_notebook
 Save your new notebook in the same directory as the rest of your workshop materials
 (e.g. Viriomic-Workshop/day5_ecology/).
 
+#### Install packages
+
+Installing FeatureTable
+
+FeatureTable can be installed using the typical install.packages() command, but
+you need to download a file first. Download the latest version [here](https://github.com/mooreryan/featuretable/releases/tag/v0.0.10) (you want the
+tar.gz file). Then, run this command:
+```{r}
+install.packages("/path/to/featuretable_0.0.10.tar.gz", repos = NULL)
+```
+
 #### Load packages
 Create a new R code chunk either using a keyboard shortcut (Ctrl + Alt + I or
 MacOS: Cmd + Option + I) or the green insert button. Load required packages
