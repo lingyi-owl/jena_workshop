@@ -31,7 +31,7 @@ Compositionality
 #### Reading:
 - Microbiome Datasets Are Compositional: And This Is Not Optional ([Gregory B. Gloor et al fmicb 2017](https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full))
 - A field guide for the compositional analysis of any-omics data ([Thomas P Quinn et al GigaScience 2019](https://pubmed.ncbi.nlm.nih.gov/31544212/))
-- Exploring MGS Bias [Ryan Moore](https://www.tenderisthebyte.com/apps/mgs_bias)
+- Exploring MGS Bias ([Ryan Moore](https://www.tenderisthebyte.com/apps/mgs_bias))
 
 #### Watching:
 - Compositionality [Microbiome Discovery 19: Compositionality](https://youtu.be/X60nFYpLWRs) 
