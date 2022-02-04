@@ -11,7 +11,7 @@ objectives:
   - "Definition: a D-part composition is positive real vector of D components describing the parts of some whole. It only carries relative information between the parts.
   - "Three principles of compositional data (analysis): scale invariance, permutation invariance, subcompositional coherence  
 - "Hill number of alpha divesity"
-  - "
+  - "Hill number is linear"
 keypoints:
 - "Next Generation Sequencing data is compositional and should be analyzed using compositional data analysis methods"
 - "Hill number is linear and more intuitive than original alpha diversity measures"
