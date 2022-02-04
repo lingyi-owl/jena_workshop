@@ -15,6 +15,7 @@ keypoints:
 #### Vidoes:
 - Alpha Diversity [Microbiome Discovery 7: Alpha Diversity](https://youtu.be/9ZvoR89HYP8)
 - Beta Diversity [Microbiome Discovery 8: Beta Diversity](https://youtu.be/lcbp6EecDg4)
+
 ## Compositional data and analysis
 #### Papers:
 - Microbiome Datasets Are Compositional: And This Is Not Optional ([Gregory B. Gloor et al fmicb 2017](https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full))
