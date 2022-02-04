@@ -13,8 +13,7 @@ objectives:
 - "Interpreting beta diversity measures through ordination."
 - "Using ggplot2."
 keypoints:
-- "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
-- "Hill numbers are linear while original alpha diversicy index values are not."
+- "Use clr transformation to normalize the data"
 ---
 
 >## Prerequisites: 
@@ -56,13 +55,14 @@ remotes::install_github("adw96/DivNet")
 Create a new R code chunk and load required packages using library().
 ~~~
 ```{r}
-library(phyloseq)
+library(featuretable)
 library(ggplot2)
 library(gridExtra)
 library(magrittr)
-library(picante)
-library(DivNet)
-library(reshape2)
+library(biplotr)
+library(zCompositions)
+library(vegan)
+library(ggdendro)
 ```
 ~~~
 #### Load data
@@ -72,25 +72,58 @@ again because we will actually be using the phyloseq package to calculate some o
 the diversity metrics
 ~~~
 ```{r}
-counts <- read.table("bin_count_table.tsv",
-sep = "\t",
-header = TRUE,
-row.names = 1)
-taxonomy <- read.table("taxonomy_columns.txt",
-sep = "\t",
-header = TRUE,
-row.names = 1,
-na.strings = c("", "NA"))
-sample_data <- read.table("sample_metadata.txt",
-sep = "\t",
-header = TRUE,
-row.names = 2)
-# phylogenetic tree of bins
-tree <- read_tree("bin_FastTree.newick")
+load("data/MO_twins/mo1k_featuretable.Rdata")
+mo1k_ft
 ```
 ~~~
 
-## Alpha diversity with phlyloseq
-Alpha diversity metrics measure species richness and evenness within samples.
-Unlike ordination and beta diversity, alpha diversity is a within-sample measure that is
-independent from other samples (although you could choose to pool samples by
+## Beta diversity ordination
+
+#### CLR transformation
+~~~
+```{r}
+mo1k_clr <- mo1k_ft$core_microbiome(
+min_sample_proportion = 0.2,
+detection_limit = 5)$
+# Replace zeros with zCompositions cmultRepl GBM method
+replace_zeros(use_cmultRepl = TRUE,
+method = "GBM")$
+# Then take CLR with base 2
+clr()
+print(mo1k_clr)
+```
+~~~
+
+### plot ordination
+~~~
+```{r}
+# perform PCA using the biplotr package and store it as object p
+p <- mo1k_clr$pca_biplot(use_biplotr = TRUE,
+# give biplotr access to sample metadata
+include_sample_data = TRUE,
+# includes or excludes arrows on the plot
+arrows = FALSE,
+# color points by Month
+point_color = "family")
+# plot the PCA you saved above
+p$biplot
+```
+~~~
+
+### modify plots
+~~~
+```{r}
+# access the PCA plot itself from the saved object
+p$plot_elem$biplot_chart_base +
+# plot the first and second principal components and
+# color the points by month and change the shape to indicate size
+# fraction
+geom_point(aes(x = PC1, y = PC2, color = family, shape = relationship),
+size = 3) +
+# set the colors to the first three values in the Kelly color
+# change the ggplot2 theme
+theme_classic() +
+# change the plot title (to nothing, in this case)
+ggtitle("PCA of clr-transformed abundances")
+```
+~~~
