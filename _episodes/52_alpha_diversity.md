@@ -401,4 +401,57 @@ ylab("Simpson's Index of Diversity (1 - D) Estimate") +
 theme(axis.text = element_text(angle = 45, hjust = 1))
 ```
 ~~~
+
+Now the pattern for Simpson is more similar to the phyloseq result and the Shannon
+result from DivNet. According to Simpson's Index of Diversity, the December samples
+are more diverse than the November samples from the same size fraction. You can
+see the same pattern in the Shannon plot, but the difference is more pronounced in
+the Simpson plot.
+
+If we want to calculate Hill numbers (effective number of species, or really effective
+number of classes in this case) again, we can do it like this:
+
+~~~
+```{r}
+shannon_divnet_hill <- shannon_divnet_meta %>%
+ggplot(aes(x = Sample,
+y = exp(estimate),
+color = Month,
+shape = Fraction)) +
+geom_point(size = 3) +
+geom_errorbar(aes(ymin = exp(lower),
+ymax = exp(upper)),
+width = 0.3) +
+theme_bw() +
+labs(title = "Effective Shannon Diversity Estimate",
+y = "Effective Number of Classes") +
+theme(axis.text = element_text(angle = 90, hjust = 1))
+simpson_divnet_hill <- simpson_divnet_meta %>%
+ggplot(aes(x = Sample,
+y = 1/estimate,
+color = Month,
+shape = Fraction)) +
+geom_point(size = 3) +
+geom_errorbar(aes(ymin = 1/lower,
+ymax = 1/upper),
+width = 0.3) +
+theme_bw() +
+labs(title = "Effective Simpson's Index Estimate",
+y = "Effective Number of Classes") +
+theme(axis.text = element_text(angle = 90, hjust = 1))
+grid.arrange(shannon_divnet_hill, simpson_divnet_hill, ncol = 2)
+```
+~~~
+
+#### Significance testing
+
+We can also do significance testing of our DivNet diversity estimates. DivNet is
+actually one of two related R packages by the same author. DivNet estimates alpha
+and beta diversity and the package breakaway estimates richness. Breakaway also
+includes a function, betta(), that can be used to do hypothesis testing of diversity
+measures calculated using either of the packages.
+
+betta() is a bit confusing and not as straightforward as our
+earlier hypothesis testing. The package author’s tutorial is [here](https://adw96.github.io/breakaway/articles/diversity-hypothesis-testing.html).
+
 {% include links.md %}
