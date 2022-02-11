@@ -235,6 +235,7 @@ in the ASV table. If you were dealing with true counts obtained from an exhausti
 ecological survey, calculating diversity metrics as above would be completely valid.
 Some of the above diversity metrics do try to account for "missing" taxa (e.g. Chao1),
 but most are not designed to work with compositional data.
+
 DivNet is compatible with Compositional Data Analysis (CoDA). Like the Chao1 metric,
 DivNet uses the existing data to estimate the number of unobserved taxa. But, the
 DivNet model is more robust and isn't nearly as reliant on singletons, which are often
@@ -244,16 +245,19 @@ enhance model fitting. For example, the four quadrants sampled in the pond study
 are really replicates, leaving size fraction and month as the major sample groups.
 With DivNet, we can make that clear to the model and make the diversity estimates
 more accurate.
+
 The downside of DivNet is that it's inner-workings are more complicated than other
 packages that calculate diversity metrics. The details are in the [DivNet paper](https://academic.oup.com/biostatistics/article/23/1/207/5841114). Briefly,
 DivNet uses Monte Carlo estimation to introduce randomness and calculate an
 integral for each sample group of interest. DivNet does return plug-in estimates of
 diversity measures (the same values you get by treating the ASV abundances as true
 counts), but the Monte Carlo estimation allows DivNet to add error bars.
+
 The other downside is that the R version of DivNet has trouble with larger datasets
 (like our pond dataset). Luckily, the DivNet algorithm has also now been
 implemented in Rust by [Ryan Moore](https://www.mooreryan.com), so you can run larger datasets. You
 can find that version of DivNet [here](https://github.com/mooreryan/divnet-rs) and the instructional book [here](https://mooreryan.github.io/divnet-rs-book/).
+
 In this walkthrough, we’ll collapse our ASVs by taxonomy so we can run DivNet
 entirely in R. In a real analysis, you would want to run the Rust version DivNet on the
 ASV table. With more than 1000 or so ASVs, the R version of DivNet would take a long
