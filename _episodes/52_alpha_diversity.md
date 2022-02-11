@@ -323,9 +323,16 @@ names(shannon_divnet)[names(shannon_divnet) == "sample_names"] <-
 # merge the Shannon data frame with the sample metadata
 shannon_divnet_meta <- merge(shannon_divnet, sample_data, by =
 "Sample")
-# fill in the same process as above, but for simpson
 ```
+~~~
+
+>## Challenge: Calculate simpson diversity using DivNet
+> Fill in the same process as above, but for simpson
+{: .challenge}
+
+
 Now, you can make some nice ggplots!
+~~~
 ```{r, fig.height=4, fig.width=10}
 shannon_divnet_plot <- shannon_divnet_meta %>%
 ggplot(aes(x = Sample,
