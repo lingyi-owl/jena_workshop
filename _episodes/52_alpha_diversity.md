@@ -360,4 +360,45 @@ ylab("Simpson's Index of Diversity (1-D) Estimate")
 grid.arrange(shannon_divnet_plot, simpson_divnet_plot, ncol = 2)
 ```
 ~~~
+
+Note that I call the values produced by DivNet estimates, because the DivNet
+algorithm estimates the number of missing species over many iterations and
+calculates the diversity indices over the range of values rather than set values. This is
+also why the DivNet plots have error bars.
+
+Note that I call the values produced by DivNet estimates, because the DivNet
+algorithm estimates the number of missing species over many iterations and
+calculates the diversity indices over the range of values rather than set values. This is
+also why the DivNet plots have error bars.
+
+The Shannon diversity estimates from DivNet are lower than the values calculated by
+phyloseq because we ran DivNet at the Class level instead of the ASV level. Overall
+though, the results are similar. October has the highest Shannon estimate and
+November and December are about even. The 1 μm size fraction samples have a
+higher Shannon diversity than the 0.2 μm fraction samples for all months.
+
+Looking at the Simpson plot, however, you'll notice a big difference between the
+DivNet and phyloseq results. Some of the difference is due to estimating diversity at
+the Class level. But, most of the difference is because the two programs are
+calculating slightly different forms of Simpson. phyloseq is calculating Simpson's
+Index (D), while DivNet is calculating Simpson's Index of Diversity (aka the
+Gini-Simpson Index) (1 - D). If we subtract the DivNet Simpson estimate from 1 during
+plotting, we get an answer that looks more like the phyloseq results.
+
+~~~
+```{r}
+simpson_divnet_meta %>%
+ggplot(aes(x = Sample,
+y = 1 - estimate, # convert Simpson from D to 1 - D
+color = Month,
+shape = Fraction)) +
+geom_point(size = 3) +
+geom_errorbar(aes(ymin = 1 - lower, # don’t forget to convert
+ymax = 1 - upper), # the error bars!
+width = 0.3) +
+theme_bw() +
+ylab("Simpson's Index of Diversity (1 - D) Estimate") +
+theme(axis.text = element_text(angle = 45, hjust = 1))
+```
+~~~
 {% include links.md %}
