@@ -263,4 +263,39 @@ entirely in R. In a real analysis, you would want to run the Rust version DivNet
 ASV table. With more than 1000 or so ASVs, the R version of DivNet would take a long
 time to finish. With more than ~2500, your R is likely to crash. 
 
+~~~
+```{r, results='hide'} # keeps results from printing to the screen
+# this part is actually easier with the featuretable
+library(featuretable)
+load("pond_featuretable.Rdata")
+# build a model matrix for DivNet
+mm <- model.matrix(
+~ Month + Fraction,
+data = pond_ft$sample_data)
+pond_class_counts <- pond_ft$collapse_features(Class)$data
+rownames(pond_class_counts) <- pond_ft$sample_data$Sample
+# setting the seed for the random number generator makes DivNet
+# results reproducible
+set.seed(20200318)
+# run DivNet
+divnet <- divnet(W = pond_class_counts, X = mm, tuning = "careful")
+```
+~~~~
+
+There are a few ways to input data to DivNet. creating a model matrix (like we
+did here) might be the easiest path if you want to include more than one independent
+variable in your model. Other ways of inputting data are described in the DivNet
+vignettes.
+
+You may have noticed that we didn’t include quadrant as a variable in the model
+matrix. This is because the quadrants are essentially replicates, as we saw in the
+relative abundance plots.
+
+This next command will show you all the diversity metrics that DivNet calculated.
+
+~~~
+```{r}
+divnet %>% names
+```
+~~~
 {% include links.md %}
