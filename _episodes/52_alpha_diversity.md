@@ -298,4 +298,59 @@ This next command will show you all the diversity metrics that DivNet calculated
 divnet %>% names
 ```
 ~~~
+
+DivNet calculates a lot of different indices, including some beta diversity measures,
+but we’ll focus on Shannon and Simpson because they’re common in the literature
+and to compare them to the measurements from earlier.
+
+You can make plots with DivNet, but they're not the nicest, so we'll extract the
+Shannon and Simpson estimates and combine them with the metadata.
+
+~~~
+```{r}
+# get the Shannon estimates as a data frame
+shannon_divnet <- divnet$shannon %>% # access the shannon section
+# use summary to get just the numbers
+summary %>%
+# turn the numbers into a data frame
+as.data.frame
+# change the name of the column with the sample names to match the
+# name of the same column from sample_data
+names(shannon_divnet)[names(shannon_divnet) == "sample_names"] <-
+"Sample"
+# if you’re unclear on how this works, try googling how to change the
+# name of a single data frame column in R
+# merge the Shannon data frame with the sample metadata
+shannon_divnet_meta <- merge(shannon_divnet, sample_data, by =
+"Sample")
+# fill in the same process as above, but for simpson
+```
+Now, you can make some nice ggplots!
+```{r, fig.height=4, fig.width=10}
+shannon_divnet_plot <- shannon_divnet_meta %>%
+ggplot(aes(x = Sample,
+y = estimate,
+color = Month,
+shape = Fraction)) +
+geom_point(size = 3) +
+geom_errorbar(aes(ymin = lower,
+ymax = upper),
+width = 0.3) +
+theme_bw() +
+ylab("Shannon Diversity Index (H) Estimate") +
+theme(axis.text = element_text(angle = 90, hjust = 1))
+simpson_divnet_plot <- simpson_divnet_meta %>%
+ggplot(aes(x = Sample,
+y = estimate,
+color = Month,
+shape = Fraction)) +
+geom_point(size = 3) +
+geom_errorbar(aes(ymin = lower,
+ymax = upper),
+width = 0.3) +
+theme_bw() +
+ylab("Simpson's Index of Diversity (1-D) Estimate")
+grid.arrange(shannon_divnet_plot, simpson_divnet_plot, ncol = 2)
+```
+~~~
 {% include links.md %}
