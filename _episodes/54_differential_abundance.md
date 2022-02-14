@@ -141,3 +141,66 @@ aldex.plot(aldex_fraction, type = "MA") # Bland-Altman style plot
 aldex.plot(aldex_fraction, type = "MW") # Effect plot
 ```
 ~~~
+
+The points on the plots can be interpreted in the same way. Each dot is an ASV. Red
+dots are ASVs with significantly different abundances in the two groups. Gray dots are
+ASVs that are highly abundant, but not significant. Black dots are rare ASVs that are
+not significant.
+The first plot (`type = "MA"`) is a Bland-Altman or Tukey Mean Difference plot
+(different names are used in different fields). The x-axis is the centered log-ratio
+abundance of the ASVs and the y-axis is the median difference in abundance of the
+ASV in each size fraction. ASVs near the top of the plot are more abundant in the 1μm
+fraction and ASVs nearer the bottom are more abundant in the 0.2μm fraction.
+The second plot (`type = "MW"`) is an effect plot. It has the same y-axis, but the x-axis
+is the "dispersion" of each ASV. The dispersion is really the estimated pooled standard
+deviation for each ASV. The gray dotted lines represent an estimated effect size of  1.
+Effect size is a measure of the strength of a relationship. The effect size metric used in
+`ALDEx2` is more robust than the p-values, so the authors recommend examining
+ASVs based on effect size rather than p-value. Specifically, they recommend
+examining ASVs with an effect size of ≥1 or ≤-1 to avoid analyzing false positives.
+You can make a volcano plot of the data by plotting `dif.btw` (median difference
+between groups) on the x-axis and p-value on the y-axis. I’m not really a fan of volcano
+plots, but they are common (especially with ANCOM), so I’ll show you how to make
+one.
+
+~~~
+```{r}
+aldex_fraction %≥%
+ggplot()+
+geom_point(aes(x = diff.btw,
+y = we.eBH,
+color = ifelse(effect ≥= 1 | effect ≤= -1, "Effect
+size ≥ 1 or ≤ -1", "Effect size ≤ 1 and ≥ -1"))) +
+geom_hline(yintercept = 0.05,
+color = "gray70") +
+scale_color_manual(values = c("black", "red")) +
+labs(color = "Effect size",
+title = "Volcano plot",
+x = "Median difference between groups",
+y = "Expected BH adjusted p-value") +
+theme_bw()
+```
+~~~
+
+Again, each point represents one ASV. ASVs to the left of x = 0 are more abundant in
+the 0.2μm fraction and ASVs to the right are more abundant in the 1μm fraction. The
+gray line indicates a p-value of 0.05, so any ASVs below that line returned a significant
+p-value. ASVs are colored based on effect size, with red points indicating ASVs with an
+effect size of ≥ 1 or ≤ -1. As you can see, some of the ASVs that have significant p-values
+but small effect sizes are less likely to be of biological interest.
+If you wanted to identify the ASVs in red in the Volcano plot, you can subset the
+`ALDEx2` table like this:
+~~~
+```{r}
+fraction_effective_asvs ≤- subset(aldex_fraction, effect >= 1 | effect
+≤= -1)
+dim(fraction_effective_asvs) # displays the table dimensions
+```
+~~~
+
+Looking at the table dimensions, we can see that there are 80 ASVs with an effect size
+≥ 1 or ≤ -1 that would warrant further consideration.
+As practice, compare ASVs between months and between size fractions within
+months. For at least one comparison, construct the plots and do the subsetting. For
+Month, you will have to test three combinations: October-November,
+October-December, and November-December.
