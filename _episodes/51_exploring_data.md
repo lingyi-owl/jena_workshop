@@ -77,6 +77,10 @@ library(magrittr)
 
 R will throw an error if any of the packages are not installed.
 
+#### Download the data
+
+The input data for the workshop today can be found [here](https://github.com/lingyi-owl/jena_workshop/tree/gh-pages/data)
+
 #### Load data
 
 Before you load the data, make sure that the name of the contig column matches in the
