@@ -1,0 +1,143 @@
+---
+title: "Differential abundance"
+teaching: 60
+exercises: 60
+questions:
+- "Which features vary in abundance with categorical variables?"
+objectives:
+- "use ALDEx2 and ANCOM to perform differential abundance analysis."
+keypoints:
+- "Use clr transformation to normalize the data"
+---
+
+>## Prerequisites: 
+> - R packages:
+  - FeatureTable
+  - ALDEx2
+  - ggplot2
+  - magrittr
+{: .prereq}
+
+## Set up
+#### Set up an R Notebook
+Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
+and add fields for author and date. Save your new notebook in the same directory as
+the rest of your workshop materials (e.g. Viriomic-Workshop/day5_ecology/).
+
+#### Installing packages
+Installing ALDEx2
+~~~
+```{r}
+library(devtools)
+devtools::install_github("ggloor/ALDEx_bioc")
+```
+~~~
+
+#### Load packages
+Create a new R code chunk and load required packages using library().
+~~~
+```{r}
+library(ALDEx2)
+library(ggplot2)
+library(featuretable)
+library(magrittr)
+```
+~~~
+
+#### Load data
+We saved the whole FeatureTable object earlier, so we can just load that instead of
+loading all the data separately again.
+~~~
+```{r}
+load("pond_featuretable.Rdata")
+```
+Filter ASVs
+As usual, we’ll do some filtering of our ASV table.
+```{r}
+pond_core_25 ≤- pond_ft$core_microbiome(
+min_sample_proportion = 0.25,
+detection_limit = 5)
+print(pond_core_25)
+```
+~~~
+
+## Differential abundance
+In addition to wondering which ASVs vary in abundance with continuous variables
+(e.g. salinity, dissolved oxygen), you probably also want to know which ASVs vary in
+abundance with categorical variables (e.g. Month, Fraction).
+For differential abundance testing, we'll use ALDEx2 (ANOVA-Like Differential
+Expression) here. Another common method you'll see in papers is ANCOM. Both are
+CoDA compatible, so long as your counts have been log-ratio transformed. ALDEx2 
+will do the transformation for us, so we can feed it an untransformed ASV table.
+Unfortunately, ALDEx2 doesn't currently support testing more than two groups at
+once, so we'll have to test some combinations by hand. Luckily, the feature table
+makes it really easy to select samples based on metadata.
+
+~~~
+```{r}
+# October by fraction
+oct_one_ft ≤- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+"October")
+oct_two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+"October")
+# November by fraction
+nov_one_ft ≤- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+"November")
+nov_two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+"November")
+# December by fraction
+dec_one_ft ≤- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+"December")
+dec_two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+"December")
+# Fraction
+one_ft ≤- pond_core_25$keep_samples(Fraction == "1um")
+two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um")
+# October
+oct_ft ≤- pond_core_25$keep_samples(Month == "October")
+# November
+nov_ft ≤- pond_core_25$keep_samples(Month == "November")
+# December
+dec_ft ≤- pond_core_25$keep_samples(Month == "December")
+```
+Let's start by comparing ASV abundances between the size fractions. We'll stick the
+two fraction tables back together, make a conditions vector, and run `ALDEx2`.
+```{r, message=FALSE}
+# combine the ASV tables from two fraction feature tables
+fraction ≤- rbind(one_ft$data, two_ft$data)
+# make a conditions vector so aldex knows which samples belong in each
+# category (there are 12 1 μm samples and 12 0.2 μm samples)
+conds_fraction ≤- c(rep("1um", 12), rep("0.2um", 12))
+# run aldex
+aldex_fraction ≤- aldex(t(fraction), # aldex wants samples to be
+columns
+conds_fraction,
+test = "t", # use a t-test for diff. abundance
+effect = TRUE) # calculate ASV effect size
+```
+~~~
+
+If you look at the `aldex_fraction` table, you'll notice the columns have sort of weird
+names. Here's what they mean:
+* rab.all - median clr value for all samples in the feature
+* rab.win.0.2um - median clr value for the 0.2μm fraction samples
+* rab.win.1um - median clr value for the 1μm fraction samples
+* dif.btw - median difference in clr values between fractions
+* dif.win - median of the largest difference in clr values within fractions
+* effect - median effect size: diff.btw / max(diff.win) for all instances
+* overlap - proportion of effect size that overlaps 0 (i.e. no effect)
+∗ we.ep - Expected p-value of Welch’s t test
+∗ we.eBH - Expected Benjamini-Hochberg corrected p-value of Welch’s t test
+∗ wi.ep - Expected p-value of Wilcoxon rank test
+∗ wi.eBH - Expected Benjamini-Hochberg corrected p-value of Wilcoxon test
+Now, let’s make some plots of the data.
+
+~~~
+```{r}
+# plot the results
+par(mfrow=c(1,2)) # a graphical parameter that sets up the following
+plots to line up on one row and in two columns
+aldex.plot(aldex_fraction, type = "MA") # Bland-Altman style plot
+aldex.plot(aldex_fraction, type = "MW") # Effect plot
+```
+~~~
