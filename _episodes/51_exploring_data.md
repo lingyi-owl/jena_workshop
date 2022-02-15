@@ -3,7 +3,7 @@ title: "Exploring data"
 teaching: 30
 exercises: 60
 questions:
-- "What is the differences between absulte abundance and relative abundance?"
+- "What are the differences between absulte abundance and relative abundance?"
 - "Why is it necessary to filter out low-abundance features?"
 objectives:
 - "Using R Notebooks."
