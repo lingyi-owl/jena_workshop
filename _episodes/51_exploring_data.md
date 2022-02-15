@@ -40,7 +40,7 @@ and add fields for author and date. Here is an example:
 
 ~~~
 ---
-title: "Alpha diversity"
+title: "Exploring data"
 author: "Ling-Yi Wu"
 date: "28/01/2022"
 output: html_notebook
