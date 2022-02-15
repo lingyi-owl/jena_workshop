@@ -14,7 +14,7 @@ objectives:
 - "Filtering ASVs to exclude low-abundance features."
 keypoints:
 - "Plot relative abundance plots to get a feeling with the data."
-- 'Picking thresholds for filtering can be tricky. Play with the thresholds to filter data based on your questions and your data."
+- "Picking thresholds for filtering can be tricky. Play with the thresholds to filter data based on your questions and your data."
 ---
 
 >## Prerequisites: 
