@@ -209,3 +209,16 @@ pond_ft$plot() + scale_x_discrete(labels=pond_ft$sample_data$Sample)
 ```
 ~~~
 {% include links.md %}
+
+That’s much better. The scale_x_discrete() function is from ggplot2, which is what
+featuretable is using to make plots. You’ll see more about this later on. For now, let’s
+talk about the plot’s appearance. Notice that only 8 ASVs were assigned colors, while
+the rest were lumped into the “Other” category. The FeatureTable default is to
+highlight only the top 8 most abundant ASVs. I’ll show you how to change this setting
+later. The bars are all different heights because they represent raw ASV counts for
+each sample, which makes it hard to see patterns, especially in samples with fewer
+reads overall. The samples are also a little jumbled because they’re still sorted
+alphabetically by SRA accession, rather than sample name. That’s because the
+featuretable automatically plots row names on the x axis, which in our case are the
+SRA accessions. We replaced the names, but not the underlying plotting, so the
+samples stayed in the same order.
