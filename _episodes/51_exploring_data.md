@@ -264,3 +264,29 @@ axis.text.x = element_text(angle = 0)) # change x axis text angle
 What’s happening to `pond_ft` in this new code? Try to talk yourself through the
 process before reading further.
 
+First, we collapse the samples in `pond_ft` by month using `collapse_samples()`.
+Then, relative abundance is calculated for each month using `map_samples()`. Finally,
+we plot the result.
+If you have used ggplot2 before, the arguments in the plot function should be familiar
+to you because the FeatureTable plot function is a wrapper for ggplot2. The only
+argument that is unique to FeatureTable is `num_features`, which was used to change
+the number of highlighted ASVs (i.e. the number of ASVs assigned a color).
+
+The months are out of order, though. Again, we have things in alphabetical order on the x
+axis, but in this case we would prefer them to be in chronological order. To fix this, we
+can use `scale_x_discrete()` again.
+
+~~~
+```{r}
+pond_ft$
+collapse_samples(Month)$
+map_samples(relative_abundance)$
+plot(num_features = 12,
+legend_title = "ASV",
+xlab = "Month",
+ylab = "Relative Abundance",
+axis.text.x = element_text(angle = 0)) +
+# reorder x axis labels
+scale_x_discrete(limits=c("October", "November", "December"))
+```
+~~~
