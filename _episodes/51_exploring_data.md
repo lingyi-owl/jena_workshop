@@ -290,3 +290,6 @@ axis.text.x = element_text(angle = 0)) +
 scale_x_discrete(limits=c("October", "November", "December"))
 ```
 ~~~
+
+Make a similar chart for size fraction. Are there possible differences in the microbial
+community based on size fraction?
