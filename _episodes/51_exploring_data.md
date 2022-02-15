@@ -42,7 +42,7 @@ and add fields for author and date. Here is an example:
 ---
 title: "Exploring data"
 author: "Ling-Yi Wu"
-date: "28/01/2022"
+date: "25/02/2022"
 output: html_notebook
 ---
 ~~~
