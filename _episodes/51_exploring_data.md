@@ -135,10 +135,10 @@ First, let's make a FeatureTable object with our data:
 pond_ft <- FeatureTable$new(t(counts), taxonomy, sample_data)
 ```
 ~~~
-This command puts the contig counts, taxonomy calls, and sample metadata into a
+This command puts the ASV counts, taxonomy calls, and sample metadata into a
 feature table object, where they can be easily manipulated. The order of the data is
 important here. The t() function means "transpose". We used it here
-because FeatureTable expects the rows to be samples and the columns to be contigs.
+because FeatureTable expects the rows to be samples and the columns to be features.
 To get a summary of your FeatureTable object, use this command:
 ~~~
 print(pond_ft)
@@ -152,11 +152,11 @@ FeatureTable:
   sample_data  -- 14 covariates
 ```
 Make sure that the dimensions in the summary match correctly to the data! The data
-category is the contig count table, the feature_data is the taxonomy, and the sample_data is
+category is the ASV count table, the feature_data is the taxonomy, and the sample_data is
 the sample metadata.
 You can also access specific pieces of your FeatureTable object using the $:
 ```{r}
-crass_ft$data[1:5,1:5]
+pond_ft$data[1:5,1:5]
 ```
 The above command will show you the first 5 rows and columns of the contig count table. Try
 on your own to view the first 5 rows of the feature_data, then the first 5 columns of the
@@ -166,19 +166,26 @@ sample_data.
 R objects and other data can be saved as R objects to make them easy to use again
 later. We’re going to save the FeatureTable object now so we don’t have to build it
 again in later analysis.
-save(crass_ft, file = "data/crass_featuretable.Rdata")
-crass_featuretable.Rdata will be created in whichever directory your R Notebook is
+~~~
+```r
+save(pond_ft, file = "data/pond_featuretable.Rdata")
+```
+~~~
+pond_featuretable.Rdata will be created in whichever directory your R Notebook is
 saved. You can save all types of Rdata, not just FeatureTable objects. It’s especially
 useful in collaboration so you’re not passing several documents back and forth.
 Later, when we want to use the FeatureTable again, use this command:
-load("data/crass_featuretable.Rdata")
+load("data/pond_featuretable.Rdata")
 
 #### Abundance plots with FeatureTable
 Let's take a quick look at the data before we get started. Here's how you make a
-very basic plot of contig abundance in each sample:
+very basic plot of ASV abundance in each sample:
+
+~~~
 ```{r}
-crass_ft$plot()
+pond_ft$plot()
 ```
+~~~
 
 First, let’s talk about the code and then we’ll get to the plot. We used the $ before to
 access parts of the FeatureTable object, but we can also use it to access functions. It’s
