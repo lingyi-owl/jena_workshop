@@ -225,12 +225,14 @@ samples stayed in the same order.
 Let’s view ASVs in terms of relative abundance rather than raw counts. To do this in
 FeatureTable, run this code:
 
+~~~
 ```{r}
 pond_ft$
 # applies the relative abundance function to samples before plotting
 map_samples(relative_abundance)$
 plot() + scale_x_discrete(labels=pond_ft$sample_data$Sample)
 ```
+~~~
 Again we apply the FeatureTable plot function to pond_ft, but we have some new
 code in there. Now, pond_ft is run through the map_samples(relative_abundance)
 and the output of that function is fed to plot(). If you use the built-in help feature
