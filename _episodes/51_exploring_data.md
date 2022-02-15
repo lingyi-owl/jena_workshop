@@ -384,3 +384,8 @@ theme_bw()
 grid.arrange(core, rare, ncol = 2)
 ```
 ~~~
+
+With a detection limit of 20, a lot of ASVs drop out right at the beginning and then the
+drop out rate slows. Do you get different patterns if you change the detection limit?
+Try to talk yourself through each part of the code and use the built-in
+help docs and Google to make sense of the parts of the code you don’t understand.
