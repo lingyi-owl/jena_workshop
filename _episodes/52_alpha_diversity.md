@@ -95,7 +95,7 @@ Alpha diversity metrics measure species richness and evenness within samples.
 Unlike ordination and beta diversity, alpha diversity is a within-sample measure that is
 independent from other samples (although you could choose to pool samples by
 categories).
-The [Diversity Metrics doc](files/Diversity metrics.pdf) contains information about all of the diversity indices you’ll
+The [Diversity Metrics doc](https://github.com/lingyi-owl/jena_workshop/blob/gh-pages/files/Diversity%20metrics.pdf) contains information about all of the diversity indices you’ll
 see coming up, as well as how each index treats richness and evenness. For more
 thorough explanations, there are a lot of good ecology resources out there.
 
@@ -111,9 +111,44 @@ sample_data(sample_data)
 save(pond_phyloseq, file = "pond_phyloseq.Rdata")
 ~~~
 
-#### Plot alpha diversity using measures from phyloseq
+There is a more thorough breakdown of alpha diversity indices in the Diversity Metrics
+doc, but here's a brief rundown because it's important to know how the indices are
+calculated when looking through these plots. Chao1 and observed ASVs are similar
+and both are different from Shannon and Simpson. Chao1 attempts to estimate the
+number of missing species and is sensitive to singletons. Observed ASVs counts the
+number ASVs are present in each sample. Therefore, these metrics are only
+measuring richness. Shannon and Simpson take into account both richness and
+evenness. The Hill numbers, also known as effective number of species, show the
+number of perfectly even species that would have to be present to return certain
+alpha diversity values. They can be calculated from Shannon, Simpson, and a variety
+of other metrics. See [Joust 2006](http://www.loujost.com/Statistics%20and%20Physics/Diversity%20and%20Similarity/JostEntropy%20AndDiversity.pdf) for details on conversions.
+
+Before we get to the plotting, here’s a way to make sure that the samples are plotted
+in chronological order.
+
 ~~~
 ```{r}
+# make a vector with the samples in the desired plotting order
+sample_order <- c("Oct_1_1", "Oct_1_2", "Oct_1_3", "Oct_1_4",
+"Oct_02_1", "Oct_02_2", "Oct_02_3", "Oct_02_4", "Nov_1_1", "Nov_1_2",
+"Nov_1_3", "Nov_1_4", "Nov_02_1", "Nov_02_2", "Nov_02_3", "Nov_02_4",
+"Dec_1_1", "Dec_1_2", "Dec_1_3", "Dec_1_4", "Dec_02_1", "Dec_02_2",
+"Dec_02_3", "Dec_02_4")
+# turn the Sample column in the sample metadata into a character
+within the phyloseq object
+pond_phyloseq@sam_data$Sample <- pond_phyloseq@sam_data$Sample %>%
+as.character()
+# use factor() to apply levels to the Sample column
+pond_phyloseq@sam_data$Sample <- factor(pond_phyloseq@sam_data$Sample,
+levels = sample_order)
+```
+~~~
+
+#### Plot alpha diversity using phyloseq
+~~~
+```{r}
+# make and store a plot of observed otus in each sample
+# plot_richness() outputs a ggplot plot object
 observed_otus_plot <- plot_richness(pond_phyloseq,
 x = "Sample",
 measures = c("Observed"),
