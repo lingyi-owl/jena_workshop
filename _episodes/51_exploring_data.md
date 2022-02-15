@@ -155,9 +155,13 @@ Make sure that the dimensions in the summary match correctly to the data! The da
 category is the ASV count table, the feature_data is the taxonomy, and the sample_data is
 the sample metadata.
 You can also access specific pieces of your FeatureTable object using the $:
+
+~~~
 ```{r}
 pond_ft$data[1:5,1:5]
 ```
+~~~
+
 The above command will show you the first 5 rows and columns of the contig count table. Try
 on your own to view the first 5 rows of the feature_data, then the first 5 columns of the
 sample_data.
