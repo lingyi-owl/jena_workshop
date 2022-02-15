@@ -82,7 +82,7 @@ R will throw an error if any of the packages are not installed.
 
 #### Download the data
 
-The input data for the workshop today can be found [here](https://github.com/lingyi-owl/jena_workshop/tree/gh-pages/data).Store these data in the folder of Viriomic-Workshop/day5_ecology/data/.
+The input data for the workshop today can be found [here](https://github.com/lingyi-owl/jena_workshop/tree/gh-pages/data).Store these data in the directory of Viriomic-Workshop/day5_ecology/data/.
 
 #### Load data
 
@@ -121,8 +121,8 @@ comments can be made within R functions without interfering with running the
 function.
 Also make sure to take note of the file paths: The current working directory of an R
 Notebook is the directory in which the R Notebook is saved. For example, because the
-sample metadata is saved in the same folder, we don’t have to provide a file path
-beyond the name of the file.
+sample metadata is saved in the directory of "data" in the current working directory, 
+we provide a relative file path beyond the name of the file.
 
 ## Data Overview with FeatureTable
 FeatureTable is an R package designed to hold and manipulate sequencing data.
