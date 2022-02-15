@@ -13,7 +13,8 @@ objectives:
 - "Plotting relative abundance."
 - "Filtering ASVs to exclude low-abundance features."
 keypoints:
-- "Having a data structure would bring many benefits in a long term."
+- "Plot relative abundance plots to get a feeling with the data."
+- 'Picking thresholds for filtering can be tricky. Play with the thresholds to filter data based on your questions and your data."
 ---
 
 >## Prerequisites: 
