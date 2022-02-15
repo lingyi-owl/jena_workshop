@@ -95,7 +95,7 @@ function:
 ~~~
 ```{r}
 # ASV table with raw counts
-counts <- read.table("data/asv_count_table.tsv",
+counts <- read.table("data/asv_count_table.txt",
 # tells the function that rows are separated by a tab
 sep = "\t",
 # logical confirming that the table already has headers
