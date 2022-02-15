@@ -210,15 +210,32 @@ pond_ft$plot() + scale_x_discrete(labels=pond_ft$sample_data$Sample)
 ~~~
 {% include links.md %}
 
-That’s much better. The scale_x_discrete() function is from ggplot2, which is what
-featuretable is using to make plots. You’ll see more about this later on. For now, let’s
-talk about the plot’s appearance. Notice that only 8 ASVs were assigned colors, while
-the rest were lumped into the “Other” category. The FeatureTable default is to
-highlight only the top 8 most abundant ASVs. I’ll show you how to change this setting
-later. The bars are all different heights because they represent raw ASV counts for
+The scale_x_discrete() function is from ggplot2, which is what featuretable is using to make plots. 
+You’ll see more about this later on. For now, let’s talk about the plot’s appearance. Notice that 
+only 8 ASVs were assigned colors, while the rest were lumped into the “Other” category. The FeatureTable default is to
+highlight only the top 8 most abundant ASVs.The bars are all different heights because they represent raw ASV counts for
 each sample, which makes it hard to see patterns, especially in samples with fewer
 reads overall. The samples are also a little jumbled because they’re still sorted
 alphabetically by SRA accession, rather than sample name. That’s because the
 featuretable automatically plots row names on the x axis, which in our case are the
 SRA accessions. We replaced the names, but not the underlying plotting, so the
 samples stayed in the same order.
+
+#### Relative Abundance
+Let’s view ASVs in terms of relative abundance rather than raw counts. To do this in
+FeatureTable, run this code:
+
+```{r}
+pond_ft$
+# applies the relative abundance function to samples before plotting
+map_samples(relative_abundance)$
+plot() + scale_x_discrete(labels=pond_ft$sample_data$Sample)
+```
+Again we apply the FeatureTable plot function to pond_ft, but we have some new
+code in there. Now, pond_ft is run through the map_samples(relative_abundance)
+and the output of that function is fed to plot(). If you use the built-in help feature
+(?map_samples()), you’ll see that the map_samples() function is a helper function for
+the more general map() in FeatureTable and is shorthand for map(ft, "samples",
+relative_abundance). For example, you could also write
+pond_ft$map_samples(relative_abundance) as map(pond_ft, "samples",
+relative_abundance).
