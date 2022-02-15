@@ -320,7 +320,9 @@ filtering run:
 ~~~
 print(pond_core_25) # should have 24 samples and 1658 features
 ~~~
-Exploring the core microbiome
+
+#### Exploring the core microbiome
+
 In the above examples, I picked 5 for the detection limit (i.e. an ASV with a count of
 less than 5 will be removed), but it's an arbitrary cutoff. That being said, any detection
 limit is generally arbitrary. The minimum sample proportion is also fairly arbitrary. I
