@@ -195,14 +195,17 @@ First, let’s talk about the code and then we’ll get to the plot. We used the
 access parts of the FeatureTable object, but we can also use it to access functions. It’s
 similar to the %>% function from magrittr, in that it feeds the object preceding the $ to
 the following function. Here, we used the $ to apply the FeatureTable plot() function
-to crass_ft. Keep in mind that the plot() function here is not the same as the base R
+to pond_ft. Keep in mind that the plot() function here is not the same as the base R
 plot() function. When applied to a FeatureTable object, $plot() is actually an alias
 for the function featuretable.plot()which is actually a ggplot2 wrapper. You’ll see
 more about the $ operator and FeatureTable functions coming up. The topic is also
 covered in the FeatureTable vignettes.
 Onto the plot. First off, the x axis labels aren’t very informative right now. We can
 replace the axis labels with more meaningful names using scale_x_discrete():
+
+~~~
 ```{r}
-crass_ft$plot() + scale_x_discrete(labels=crass_ft$sample_data$Sample)
+pond_ft$plot() + scale_x_discrete(labels=pond_ft$sample_data$Sample)
 ```
+~~~
 {% include links.md %}
