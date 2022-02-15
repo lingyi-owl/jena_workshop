@@ -71,21 +71,21 @@ again because we will actually be using the phyloseq package to calculate some o
 the diversity metrics
 ~~~
 ```{r}
-counts <- read.table("bin_count_table.tsv",
+counts <- read.table("data/asv_count_table.txt",
 sep = "\t",
 header = TRUE,
 row.names = 1)
-taxonomy <- read.table("taxonomy_columns.txt",
+taxonomy <- read.table("data/taxonomy_columns.txt",
 sep = "\t",
 header = TRUE,
 row.names = 1,
 na.strings = c("", "NA"))
-sample_data <- read.table("sample_metadata.txt",
+sample_data <- read.table("data/sample_metadata.txt",
 sep = "\t",
 header = TRUE,
 row.names = 2)
 # phylogenetic tree of bins
-tree <- read_tree("bin_FastTree.newick")
+tree <- read_tree("data/asv_FastTree.newick")
 ```
 ~~~
 
@@ -99,12 +99,12 @@ categories).
 ~~~
 ```{r}
 # make a and save phyloseq object
-crass_phyloseq <- phyloseq(
+pond_phyloseq <- phyloseq(
 otu_table(counts, taxa_are_rows = T),
 tax_table(as.matrix(taxonomy)),
 sample_data(sample_data)
 )
-save(crass_phyloseq, file = "crass_phyloseq.Rdata")
+save(pond_phyloseq, file = "pond_phyloseq.Rdata")
 ~~~
 
 #### Plot alpha diversity using measures from phyloseq
@@ -128,7 +128,7 @@ labs(y = "Observed ASVs")
 #### Plot alpha diversity using Hill Numbers
 ~~~
 ```{r}
-shannon <- estimate_richness(crass_phyloseq,
+shannon <- estimate_richness(pond_phyloseq,
 measures = c("Shannon"))
 hill_shannon <- sapply(shannon, function(x) {exp(x)}) %>% as.matrix()
 row.names(hill_shannon) <- row.names(shannon)
