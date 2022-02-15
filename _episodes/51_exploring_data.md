@@ -82,20 +82,20 @@ R will throw an error if any of the packages are not installed.
 
 #### Download the data
 
-The input data for the workshop today can be found [here](https://github.com/lingyi-owl/jena_workshop/tree/gh-pages/data)
+The input data for the workshop today can be found [here](https://github.com/lingyi-owl/jena_workshop/tree/gh-pages/data).Store these data in the folder of Viriomic-Workshop/day5_ecology/data/.
 
 #### Load data
 
-Before you load the data, make sure that the name of the contig column matches in the
-contig count table and the taxonomy table. They will not match by default. My labels
-for both are “contig_id”
-Load the contig count table, taxonomy table, and sample metadata using the read.table()
+Before you load the data, make sure that the name of the feature(ASV) column matches in the
+feature(ASV) count table and the taxonomy table. They will not match by default. My labels
+for both are “ASV”
+Load the ASV count table, taxonomy table, and sample metadata using the read.table()
 function:
 
 ~~~
 ```{r}
 # ASV table with raw counts
-counts <- read.table("data/contig_count_table.tsv",
+counts <- read.table("data/asv_count_table.tsv",
 # tells the function that rows are separated by a tab
 sep = "\t",
 # logical confirming that the table already has headers
@@ -107,7 +107,7 @@ taxonomy <- read.table("data/taxonomy_columns.txt",
 sep = "\t",
 header = TRUE,
 row.names = 1,
-na.strings = c("", "NA")
+na.strings = c("", "NA"))
 # sample metadata
 sample_data <- read.table("data/sample_metadata.txt",
 sep = "\t",
