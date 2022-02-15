@@ -245,7 +245,7 @@ relative_abundance).
 #### Grouping samples for plotting
 Let's break the data apart a bit and see if we can identify related metadata. Looking at
 the metadata, the obvious divisions of samples are by Month and Fraction. Let's start
-with Month:
+with `Month`:
 
 ~~~
 ```{r}
@@ -257,8 +257,7 @@ plot(num_features = 12, # plot the top 12 features (ASVs)
 legend_title = "ASV", # change legend title
 xlab = "Month", # change x axis title label
 ylab = "Relative Abundance", # change y axis title label
-axis.text.x = element_text(angle = 0)) # change x axis text
-angle
+axis.text.x = element_text(angle = 0)) # change x axis text angle
 ```
 ~~~
 What’s happening to pond_ft in this new code? Try to talk yourself through the
