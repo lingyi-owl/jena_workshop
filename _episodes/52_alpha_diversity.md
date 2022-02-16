@@ -109,6 +109,7 @@ tax_table(as.matrix(taxonomy)),
 sample_data(sample_data)
 )
 save(pond_phyloseq, file = "pond_phyloseq.Rdata")
+```
 ~~~
 
 There is a more thorough breakdown of alpha diversity indices in the Diversity Metrics
@@ -157,6 +158,7 @@ geom_point(size = 3) +
 theme_bw() +
 theme(axis.text.x = element_text(angle = 90)) +
 labs(y = "Observed ASVs")
+```
 ~~~
 
 >## Challenge: Make alpha diversity plots of Chao1, Shannon, and Simpson
@@ -185,6 +187,7 @@ theme(axis.text.x = element_text(angle = 90)) +
 labs(title = "Effective Shannon Diversity Index",
 y = "Effective number of species") +
 scale_x_discrete(limits = sample_order)
+```
 ~~~
 
 >## Challenge: Plot alpha diversity using Hill Numbers from Simpson
