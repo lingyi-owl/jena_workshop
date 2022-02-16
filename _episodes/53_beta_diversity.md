@@ -36,20 +36,10 @@ and add fields for author and date. Save your new notebook in the same directory
 the rest of your workshop materials (e.g. Viriomic-Workshop/day5_ecology/).
 
 #### Installing packages
-Installing phyloseq
-~~~
-install.packages("BiocManager")
-library(BiocManager)
-BiocManager::install("phyloseq")
-~~~
+Installing biplotr
 
-Installing DivNet
-~~~
-install.packages(“remotes”)
-library(remotes)
-remotes::install_github("adw96/breakaway")
-remotes::install_github("adw96/DivNet")
-~~~
+Follow the [instructions](https://github.com/mooreryan/biplotr) to install biplotr.
+
 
 #### Load packages
 Create a new R code chunk and load required packages using library().
