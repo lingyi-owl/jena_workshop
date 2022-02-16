@@ -172,6 +172,8 @@ shannon <- estimate_richness(pond_phyloseq,
 measures = c("Shannon"))
 hill_shannon <- sapply(shannon, function(x) {exp(x)}) %>% as.matrix()
 row.names(hill_shannon) <- row.names(shannon)
+# merge the hill numbers with the sample metadata based on their
+# rownames
 hill_shannon_meta <- merge(hill_shannon, sample_data, by =
 "row.names")
 colnames(hill_shannon_meta)[colnames(hill_shannon_meta) == "Shannon"] <- "Hill"
@@ -459,6 +461,12 @@ theme(axis.text = element_text(angle = 90, hjust = 1))
 grid.arrange(shannon_divnet_hill, simpson_divnet_hill, ncol = 2)
 ```
 ~~~
+
+The observed ASVs and Chao1 measures tell us that the November samples have a
+higher richness than the Ocotober samples, followed by the December samples. The
+Shannon, Simpson, and derived Hill numbers tell us that the October samples are
+more even than the November and December samples. In almost all months, the 1 μm
+fraction is more even and richer than the 0.22 μm-1 μm fraction.
 
 #### Significance testing
 
