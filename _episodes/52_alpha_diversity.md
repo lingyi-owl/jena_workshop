@@ -22,7 +22,7 @@ keypoints:
   - phyloseq
   - ggplot2
   - gridExtra
-  - magrittr
+  - Magrittr
   - picante
   - DivNet
   - reshape2
@@ -243,29 +243,6 @@ faiths_plot
 ```
 ~~~
 
-## Significance testing
-As long as our calculated alpha diversity metrics meet the correct assumptions of ANOVA, we
-can use an ANOVA to tell if there are significant differences in sample alpha diversity
-based on the categorical data (i.e. month, size fraction). If our data does not meet the
-assumptions, we can use a Kruskal-Wallis test instead.
-
-First, we’ll check to see if the Shannon Hill numbers meet the assumptions of an ANOVA. Then, we’ll run either the ANOVA or a Kruskal-Wallis test. 
-~~~
-```{r}
-# test for normal distribution of effective number of species values
-from Shannon
-hill_shannon_meta$Hill %>% shapiro.test()
-# plot distribution of effective number of species values
-hill_shannon_meta %>%
-ggplot() +
-geom_density(aes(x = Hill))
-# test for homogeneity of variances
-bartlett.test(Hill ~ interaction(Month, Fraction), data = hill_meta)
-# use an ANOVA to test for differences among categories
-anova_shannon_hill <- aov(Hill ~ Month*Fraction, data =
-hill_shannon_meta)
-summary(anova_shannon_hill)
-~~~
 ## Alpha diversity with Divnet
 
 The phyloseq package calculates alpha diversity metrics based solely on the numbers
@@ -489,7 +466,6 @@ and beta diversity and the package breakaway estimates richness. Breakaway also
 includes a function, betta(), that can be used to do hypothesis testing of diversity
 measures calculated using either of the packages.
 
-betta() is a bit confusing and not as straightforward as our
-earlier hypothesis testing. The package author’s tutorial is [here](https://adw96.github.io/breakaway/articles/diversity-hypothesis-testing.html).
+betta() is a bit confusing. The package author’s tutorial is [here](https://adw96.github.io/breakaway/articles/diversity-hypothesis-testing.html).
 
 {% include links.md %}
