@@ -134,8 +134,7 @@ sample_order <- c("Oct_1_1", "Oct_1_2", "Oct_1_3", "Oct_1_4",
 "Nov_1_3", "Nov_1_4", "Nov_02_1", "Nov_02_2", "Nov_02_3", "Nov_02_4",
 "Dec_1_1", "Dec_1_2", "Dec_1_3", "Dec_1_4", "Dec_02_1", "Dec_02_2",
 "Dec_02_3", "Dec_02_4")
-# turn the Sample column in the sample metadata into a character
-within the phyloseq object
+# turn the Sample column in the sample metadata into a character within the phyloseq object
 pond_phyloseq@sam_data$Sample <- pond_phyloseq@sam_data$Sample %>%
 as.character()
 # use factor() to apply levels to the Sample column
@@ -215,7 +214,7 @@ ncol = 2)
 ~~~
 
 >## Discussion: 
-> What do the results of each index tell you about the diversity of the microbial community in each sample?
+> What do you see from the plot? What do the results of each index tell you about the diversity of the microbial community in each sample?
 {: .discussion}
 
 #### Plot alpha diversity using phylogenetic information
