@@ -23,16 +23,13 @@ keypoints:
 > - Intro to R and RStudio ([video](https://youtu.be/lVKMsaWju8w))
 > - Intro to R Notebooks 
 > - R packages:
-  - phyloseq
   - ggplot2
+  - FeatureTable
   - gridExtra
-  - magrittr
-  - picante
-  - DivNet
-  - reshape2
+  - Magrittr
 > - Data from pevious workshops:
-  - contig abundance table
-  - contig taxonomy table
+  - ASV abundance table
+  - taxonomy table
   - sample metadata table
   - taxonomy phylogenetic tree
 {: .prereq}
