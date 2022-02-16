@@ -174,8 +174,7 @@ hill_shannon <- sapply(shannon, function(x) {exp(x)}) %>% as.matrix()
 row.names(hill_shannon) <- row.names(shannon)
 hill_shannon_meta <- merge(hill_shannon, sample_data, by =
 "row.names")
-colnames(hill_shannon_meta)[colnames(hill_shannon_meta) == "Shannon"]
-<- "Hill"
+colnames(hill_shannon_meta)[colnames(hill_shannon_meta) == "Shannon"] <- "Hill"
 hill_shannon_plot <- ggplot(data = hill_shannon_meta) +
 geom_point(aes(x = Sample,
 y = Hill,
