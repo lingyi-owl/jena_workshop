@@ -14,7 +14,7 @@ objectives:
 - "Using ggplot2."
 keypoints:
 - "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions and interpret the results based on the methods you choosed."
-- "Hill numbers are linear and more intuitive while original alpha diversicy index values are not."
+- "Hill numbers are linear and intuitive while original alpha diversicy index values are not."
 ---
 
 >## Prerequisites: 
