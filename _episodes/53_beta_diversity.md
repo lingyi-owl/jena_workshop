@@ -151,7 +151,7 @@ p$plot_elem$biplot_chart_base +
 ~~~
 
 >## Discussion: 
-> What do you see from the plot? What does the PCA plot tell you about the microbial community diversity between samples?
+> What do you see from the plot? What does the PCA plot of clr-transformed abundances tell you about the microbial community diversity between samples?
 {: .discussion}
 
 Samples separate first by month, and then by size
@@ -231,8 +231,80 @@ weighted version is not.
 We'll use the phyloseq package to calculate UniFrac distance. First, we’ll load the
 phyloseq object we made in Alpha Diversity:
 
+~~~
 ```{r}
-load("data/pond_phyloseq.Rdata")
+# make a phyloseq object with filtered ASV abundance table and taxonomy table
+counts_filter <- t(as.data.frame(pond_filter$data))
+taxonomy_filter <- taxonomy[row.names(counts_filter),]
+
+pond_filter_phyloseq <- phyloseq(
+otu_table(counts_filter, taxa_are_rows = T),
+tax_table(as.matrix(taxonomy_filter)),
+sample_data(sample_data),
+phy_tree(tree)
+)
+save(pond_phyloseq, file = "data/pond_filter_phyloseq.Rdata")
 ```
-Now, we’ll use the distance() function to calculate weighted and unweighted
+~~~
+
+Now, we’ll use the distance() function from `phyloseq` to calculate weighted and unweighted
 UniFrac:
+
+~~~
+```{r}
+# calculate weighted unifrac, convert to matrix, and save result
+weighted <- distance(pond_filter_phyloseq,
+  method = "wunifrac") %>%
+  as.matrix()
+# calculate unweighted unifrac, convert to matrix, and save result
+unweighted <- distance(pond_filter_phyloseq,
+  method = "uunifrac") %>%
+  as.matrix()
+```
+~~~
+
+And now we can perform PCA on the UniFrac distances using biplotr and make some
+nice looking plots:
+
+~~~
+```{r}
+weighted_pca <- pca_biplot(weighted, arrows = F)
+unweighted_pca <- pca_biplot(unweighted, arrows = F)
+# join sample metadata with the principal component scores
+weighted_pca_data <- merge(weighted_pca$biplot$data,
+  pond_ft$sample_data,
+  by = "row.names")
+unweighted_pca_data <- merge(unweighted_pca$biplot$data,
+  pond_ft$sample_data,
+  by = "row.names")
+# use ggplot2 to plot the scores with metadata
+weighted_pca_data %>%
+  ggplot() +
+  geom_point(aes(x = PC1, y = PC2, color = Month, shape = Fraction),
+  size = 3) +
+  scale_color_manual(values = featuretable:::ft_palette$kelly[1:3]) +
+  theme_classic() +
+  ggtitle("Weighted UniFrac")
+
+unweighted_pca_data %>%
+  ggplot() +
+  geom_point(aes(x = PC1, y = PC2, color = Month, shape = Fraction),
+  size = 3) +
+  scale_color_manual(values = featuretable:::ft_palette$kelly[1:3]) +
+  theme_classic() +
+  ggtitle("Unweighted UniFrac")
+```
+~~~
+
+>## Discussion: 
+> What do you see from the plot? What does the PCA plot of weighted and unweighted Unifract tell you about the microbial community diversity between samples?
+{: .discussion}
+
+Weighted and unweighted UniFrac are noticeably different. In
+both cases, samples from the same Month and Fraction group together, but the
+Month as a whole groups more tightly on the weighted chart. PC1 on the weighted
+UniFrac chart seems to represent the difference between October and the other two
+months, whereas PC2 differentiates November and December. In the unweighted
+chart, Month seems to drive separation on PC1, the weighted UniFrac PCA more closely resembles the Aitchison and
+Bray-Curtis PCAs. This makes sense, because Aitchison and Bray-Curtis distances are
+also based in ASV abundance (though they do not take phylogeny into account).
