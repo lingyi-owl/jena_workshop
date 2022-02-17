@@ -103,13 +103,14 @@ thorough explanations, there are a lot of good ecology resources out there.
 #### Create a phyloseq object
 ~~~
 ```{r}
-# make a and save phyloseq object
+# make and save phyloseq object
 pond_phyloseq <- phyloseq(
 otu_table(counts, taxa_are_rows = T),
 tax_table(as.matrix(taxonomy)),
-sample_data(sample_data)
+sample_data(sample_data),
+phy_tree(tree)
 )
-save(pond_phyloseq, file = "pond_phyloseq.Rdata")
+save(pond_phyloseq, file = "data/pond_phyloseq.Rdata")
 ```
 ~~~
 
