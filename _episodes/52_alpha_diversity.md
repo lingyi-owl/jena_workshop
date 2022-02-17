@@ -13,8 +13,8 @@ objectives:
 - "Extracting data from R objects."
 - "Using ggplot2."
 keypoints:
-- "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions."
-- "Hill numbers are linear while original alpha diversicy index values are not."
+- "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions and interpret the results based on the methods you choosed."
+- "Hill numbers are linear and more intuitive while original alpha diversicy index values are not."
 ---
 
 >## Prerequisites: 
