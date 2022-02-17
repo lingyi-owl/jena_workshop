@@ -13,7 +13,8 @@ objectives:
 - "Interpreting beta diversity measures through ordination."
 - "Using ggplot2."
 keypoints:
-- "Use clr transformation to normalize the data"
+- "Understand the similairties and dissimilarites of different beta diversity/distance matrices."
+- "Aitchison distance is the distance between samples or features within simplex space. We use Aitchison distance in compositional data analysis."
 ---
 
 >## Prerequisites: 
