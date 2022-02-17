@@ -60,6 +60,7 @@ library(ggplot2)
 library(gridExtra)
 library(magrittr)
 library(picante)
+library(featuretable)
 library(DivNet)
 library(reshape2)
 ```
@@ -150,14 +151,16 @@ levels = sample_order)
 # make and store a plot of observed otus in each sample
 # plot_richness() outputs a ggplot plot object
 observed_otus_plot <- plot_richness(pond_phyloseq,
-x = "Sample",
-measures = c("Observed"),
-color = "Month",
-shape = "Fraction") +
-geom_point(size = 3) +
-theme_bw() +
-theme(axis.text.x = element_text(angle = 90)) +
-labs(y = "Observed ASVs")
+  x = "Sample",
+  measures = c("Observed"),
+  color = "Month",
+  shape = "Fraction") +
+  geom_point(size = 3) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(y = "Observed ASVs")
+ 
+observed_otus_plot
 ```
 ~~~
 
@@ -178,16 +181,18 @@ hill_shannon_meta <- merge(hill_shannon, sample_data, by =
 "row.names")
 colnames(hill_shannon_meta)[colnames(hill_shannon_meta) == "Shannon"] <- "Hill"
 hill_shannon_plot <- ggplot(data = hill_shannon_meta) +
-geom_point(aes(x = Sample,
-y = Hill,
-color = Month,
-shape = Fraction),
-size = 3) +
-theme_bw() +
-theme(axis.text.x = element_text(angle = 90)) +
-labs(title = "Effective Shannon Diversity Index",
-y = "Effective number of species") +
-scale_x_discrete(limits = sample_order)
+  geom_point(aes(x = Sample,
+  y = Hill,
+  color = Month,
+  shape = Fraction),
+  size = 3) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(title = "Effective Shannon Diversity Index",
+  y = "Effective number of species") +
+  scale_x_discrete(limits = sample_order)
+  
+hill_shannon_plot
 ```
 ~~~
 
@@ -221,6 +226,12 @@ ncol = 2)
 > What do you see from the plot? What do the results of each index tell you about the diversity of the microbial community in each sample?
 {: .discussion}
 
+The observed ASVs and Chao1 measures tell us that the November samples have a
+higher richness than the Ocotober samples, followed by the December samples. The
+Shannon, Simpson, and derived Hill numbers tell us that the October samples are
+more even than the November and December samples. In almost all months, the 1 μm
+fraction is more even and richer than the 0.22 μm-1 μm fraction.
+
 #### Plot alpha diversity using phylogenetic information
 Phylogenetic trees can also be taken into account when measuring diversity. Faith's
 PD (phylogenetic distance) is one such measure and is equal to the sum of the
@@ -230,19 +241,20 @@ We can calculate it using the `pd` function from the package picante.
 ~~~
 ```{r}
 faiths <- pd(t(counts), # samples should be rows, ASVs as columns
-tree,
-include.root = F) # our tree is not rooted
-faiths_meta <- merge(faiths, sample_data, by = "row.names")
-faiths_plot <- ggplot(data = faiths_meta) +
-geom_point(aes(x = Sample,
-y = PD,
-color = Month,
-shape = Fraction),
-size = 3) +
-theme_bw() +
-theme(axis.text.x = element_text(angle = 90)) +
-labs(title = "Faith's phylogenetic distance",
-y = "Faith's PD")
+  tree,
+  include.root = F) # our tree is not rooted
+  faiths_meta <- merge(faiths, sample_data, by = "row.names")
+  faiths_plot <- ggplot(data = faiths_meta) +
+  geom_point(aes(x = Sample,
+  y = PD,
+  color = Month,
+  shape = Fraction),
+  size = 3) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(title = "Faith's phylogenetic distance",
+  y = "Faith's PD")
+
 faiths_plot
 ```
 ~~~
@@ -283,16 +295,16 @@ ASV table. With more than 1000 or so ASVs, the R version of DivNet would take a 
 time to finish. With more than ~2500, your R is likely to crash. 
 
 ~~~
-```{r, results='hide'} # keeps results from printing to the screen
-# this part is actually easier with the featuretable
-library(featuretable)
-load("pond_featuretable.Rdata")
+# Featuretable is easier to use in this case
+load("data/pond_featuretable.Rdata")
 # build a model matrix for DivNet
 mm <- model.matrix(
 ~ Month + Fraction,
 data = pond_ft$sample_data)
+
 pond_class_counts <- pond_ft$collapse_features(Class)$data
 rownames(pond_class_counts) <- pond_ft$sample_data$Sample
+
 # setting the seed for the random number generator makes DivNet
 # results reproducible
 set.seed(20200318)
@@ -354,28 +366,34 @@ Now, you can make some nice ggplots!
 ~~~
 ```{r, fig.height=4, fig.width=10}
 shannon_divnet_plot <- shannon_divnet_meta %>%
-ggplot(aes(x = Sample,
-y = estimate,
-color = Month,
-shape = Fraction)) +
-geom_point(size = 3) +
-geom_errorbar(aes(ymin = lower,
-ymax = upper),
-width = 0.3) +
-theme_bw() +
-ylab("Shannon Diversity Index (H) Estimate") +
-theme(axis.text = element_text(angle = 90, hjust = 1))
+  ggplot(aes(x = Sample,
+  y = estimate,
+  color = Month,
+  shape = Fraction)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = lower,
+  ymax = upper),
+  width = 0.3) +
+  theme_bw() +
+  ylab("Shannon Diversity Index (H) Estimate") +
+  scale_x_discrete(limits = sample_order) +
+  theme(axis.text = element_text(angle = 90, hjust = 1)) 
+
 simpson_divnet_plot <- simpson_divnet_meta %>%
-ggplot(aes(x = Sample,
-y = estimate,
-color = Month,
-shape = Fraction)) +
-geom_point(size = 3) +
-geom_errorbar(aes(ymin = lower,
-ymax = upper),
-width = 0.3) +
-theme_bw() +
-ylab("Simpson's Index of Diversity (1-D) Estimate")
+  ggplot(aes(x = Sample,
+  y = estimate,
+  color = Month,
+  shape = Fraction)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = lower,
+  ymax = upper),
+  width = 0.3) +
+  theme_bw() +
+  ylab("Simpson's Index of Diversity (D) Estimate") +
+  scale_x_discrete(limits = sample_order) +
+  theme(axis.text = element_text(angle = 90, hjust = 1)) 
+
+
 grid.arrange(shannon_divnet_plot, simpson_divnet_plot, ncol = 2)
 ```
 ~~~
@@ -385,15 +403,10 @@ algorithm estimates the number of missing species over many iterations and
 calculates the diversity indices over the range of values rather than set values. This is
 also why the DivNet plots have error bars.
 
-Note that I call the values produced by DivNet estimates, because the DivNet
-algorithm estimates the number of missing species over many iterations and
-calculates the diversity indices over the range of values rather than set values. This is
-also why the DivNet plots have error bars.
-
 The Shannon diversity estimates from DivNet are lower than the values calculated by
 phyloseq because we ran DivNet at the Class level instead of the ASV level. Overall
 though, the results are similar. October has the highest Shannon estimate and
-November and December are about even. The 1 μm size fraction samples have a
+November and December are ower. The 1 μm size fraction samples have a
 higher Shannon diversity than the 0.2 μm fraction samples for all months.
 
 Looking at the Simpson plot, however, you'll notice a big difference between the
@@ -407,25 +420,24 @@ plotting, we get an answer that looks more like the phyloseq results.
 ~~~
 ```{r}
 simpson_divnet_meta %>%
-ggplot(aes(x = Sample,
-y = 1 - estimate, # convert Simpson from D to 1 - D
-color = Month,
-shape = Fraction)) +
-geom_point(size = 3) +
-geom_errorbar(aes(ymin = 1 - lower, # don’t forget to convert
-ymax = 1 - upper), # the error bars!
-width = 0.3) +
-theme_bw() +
-ylab("Simpson's Index of Diversity (1 - D) Estimate") +
-theme(axis.text = element_text(angle = 45, hjust = 1))
+  ggplot(aes(x = Sample,
+  y = 1 - estimate, # convert Simpson from D to 1 - D
+  color = Month,
+  shape = Fraction)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = 1 - lower, # don’t forget to convert
+  ymax = 1 - upper), # the error bars!
+  width = 0.3) +
+  theme_bw() +
+  ylab("Simpson's Index of Diversity (1 - D) Estimate") +
+  scale_x_discrete(limits = sample_order) +
+  theme(axis.text = element_text(angle = 45, hjust = 1))
 ```
 ~~~
 
 Now the pattern for Simpson is more similar to the phyloseq result and the Shannon
-result from DivNet. According to Simpson's Index of Diversity, the December samples
-are more diverse than the November samples from the same size fraction. You can
-see the same pattern in the Shannon plot, but the difference is more pronounced in
-the Simpson plot.
+result from DivNet. According to Simpson's Index of Diversity, the November samples
+are more diverse than the December samples from the same size fraction. 
 
 If we want to calculate Hill numbers (effective number of species, or really effective
 number of classes in this case) again, we can do it like this:
@@ -433,40 +445,39 @@ number of classes in this case) again, we can do it like this:
 ~~~
 ```{r}
 shannon_divnet_hill <- shannon_divnet_meta %>%
-ggplot(aes(x = Sample,
-y = exp(estimate),
-color = Month,
-shape = Fraction)) +
-geom_point(size = 3) +
-geom_errorbar(aes(ymin = exp(lower),
-ymax = exp(upper)),
-width = 0.3) +
-theme_bw() +
-labs(title = "Effective Shannon Diversity Estimate",
-y = "Effective Number of Classes") +
-theme(axis.text = element_text(angle = 90, hjust = 1))
+  ggplot(aes(x = Sample,
+  y = exp(estimate),
+  color = Month,
+  shape = Fraction)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = exp(lower),
+  ymax = exp(upper)),
+  width = 0.3) +
+  theme_bw() +
+  labs(title = "Effective Shannon Diversity Estimate",
+  y = "Effective Number of Classes") +
+  scale_x_discrete(limits = sample_order) +
+  theme(axis.text = element_text(angle = 90, hjust = 1))
+
 simpson_divnet_hill <- simpson_divnet_meta %>%
-ggplot(aes(x = Sample,
-y = 1/estimate,
-color = Month,
-shape = Fraction)) +
-geom_point(size = 3) +
-geom_errorbar(aes(ymin = 1/lower,
-ymax = 1/upper),
-width = 0.3) +
-theme_bw() +
-labs(title = "Effective Simpson's Index Estimate",
-y = "Effective Number of Classes") +
-theme(axis.text = element_text(angle = 90, hjust = 1))
+  ggplot(aes(x = Sample,
+  y = 1/estimate,
+  color = Month,
+  shape = Fraction)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = 1/lower,
+  ymax = 1/upper),
+  width = 0.3) +
+  theme_bw() +
+  labs(title = "Effective Simpson's Index Estimate",
+  y = "Effective Number of Classes") +
+  scale_x_discrete(limits = sample_order) +
+  theme(axis.text = element_text(angle = 90, hjust = 1))
+
 grid.arrange(shannon_divnet_hill, simpson_divnet_hill, ncol = 2)
 ```
 ~~~
 
-The observed ASVs and Chao1 measures tell us that the November samples have a
-higher richness than the Ocotober samples, followed by the December samples. The
-Shannon, Simpson, and derived Hill numbers tell us that the October samples are
-more even than the November and December samples. In almost all months, the 1 μm
-fraction is more even and richer than the 0.22 μm-1 μm fraction.
 
 #### Significance testing
 
