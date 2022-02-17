@@ -185,3 +185,38 @@ bc_pca$biplot
 
 The `vegdist()` command comes from the vegan package and can be used to
 calculate many types of distances (try `?vegdist()`).
+
+The reason this first plot does not have any color is because the Bray-Curtis distances
+we gave to biplotr were not connected to any metadata, unlike when we were using a
+FeatureTable object. Let’s clean up this PCA as well, though this time we will have to
+work slightly harder to unite all of the data.
+
+~~~
+```{r}
+# join sample metadata with the principal component scores
+# the row names will match, so we can merge on those
+bc_pca_data <- merge(bc_pca$biplot$data,
+  pond_ft$core_microbiome(min_sample_proportion =
+  0.25, detection_limit =
+  5)$sample_data,
+  by = "row.names")
+# use ggplot2 to plot the scores with metadata
+bc_pca_data %>%
+  ggplot() +
+  geom_point(aes(x = PC1, y = PC2, color = Month, shape = Fraction),
+  size = 3) +
+  scale_color_manual(values = featuretable:::ft_palette$kelly[1:3]) +
+  theme_classic() +
+ # add labels for the percentage of variance explained by each axis
+  xlab('PC1 (86.5)') + 
+  ylab('PC2 (8.9)') +
+  ggtitle("Bray-Curtis PCA")
+```
+~~~
+
+You may have noticed that the Bray-Curtis PCA axes explain more of the variation in
+the data than the axes in the euclidean/Aitchison PCA. That's a side effect of having
+performed the PCA on a distance matrix for the Bray-Curtis plot rather than
+performing PCA on the count table as we did for the Aitchison plot. A PCA performed
+on a distance matrix will always show more variation explained than a PCA performed
+on a count table because there are fewer variables.
