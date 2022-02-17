@@ -56,64 +56,106 @@ library(ggdendro)
 ```
 ~~~
 #### Load data
-Load the ASV table, taxonomy table, and sample metadata using the read.table()
-function. Use read_tree() to import the phylogenetic tree. We’re loading the data
-again because we will actually be using the phyloseq package to calculate some of
-the diversity metrics
+
+We’re going to be using the FeatureTable object we saved earlier, so we can just load
+that instead of loading all the data separately again.
 ~~~
 ```{r}
-load("data/MO_twins/mo1k_featuretable.Rdata")
-mo1k_ft
+load("data/pond_featuretable.Rdata")
 ```
 ~~~
 
 ## Beta diversity ordination
 
-#### CLR transformation
+We're using PCA here (principal components analysis). PCoA (principal coordinate
+analysis) is similar, and even identical with certain distance measures, but is not
+compatible with compositional data.
+There are introductions to [compositional data](https://github.com/lingyi-owl/jena_workshop/blob/gh-pages/files/Vocabulary.pdf), [ordination](https://github.com/lingyi-owl/jena_workshop/blob/gh-pages/files/Statistical%20methods.pdf), and [beta diversity](https://github.com/lingyi-owl/jena_workshop/blob/gh-pages/files/Diversity%20metrics.pdf) in the docs.
+
+#### Replace zeros with zCompositions and clr transform
+
+zCompositions provides a few methods for handling zeros. Here, I use GBM
+(Geometric Bayesian multiplicative), but SQ (square root Bayesian multiplicative) and
+CZM (count zero multiplicative) are also fine choices. Notice that before zero
+replacement and transformation, we filter out ASVs in at least 25% samples with a
+detection limit of 20.
+(We didn't perform zero replacement or transform counts in the Getting Started or
+Alpha Diversity lessons because we weren't dealing with statistics yet. We were
+purely getting a feel for our data.)
+
 ~~~
 ```{r}
-mo1k_clr <- mo1k_ft$core_microbiome(
-min_sample_proportion = 0.2,
-detection_limit = 5)$
-# Replace zeros with zCompositions cmultRepl GBM method
-replace_zeros(use_cmultRepl = TRUE,
-method = "GBM")$
-# Then take CLR with base 2
-clr()
-print(mo1k_clr)
+pond_clr <- pond_ft$core_microbiome(
+  min_sample_proportion = 0.25,
+  detection_limit = 20)$
+  # Replace zeros with zCompositions cmultRepl GBM method
+  replace_zeros(use_cmultRepl = TRUE,
+  method = "GBM")$
+  # Then take CLR with base 2
+  clr()
 ```
 ~~~
 
-### plot ordination
+#### Perform PCA on the transformed data
+
+Use the $pca_biplot() command to make a PCA from a FeatureTable object:
 ~~~
 ```{r}
 # perform PCA using the biplotr package and store it as object p
-p <- mo1k_clr$pca_biplot(use_biplotr = TRUE,
-# give biplotr access to sample metadata
-include_sample_data = TRUE,
-# includes or excludes arrows on the plot
-arrows = FALSE,
-# color points by Month
-point_color = "family")
+p <- pond_clr$pca_biplot(use_biplotr = TRUE,
+  # give biplotr access to sample metadata
+  include_sample_data = TRUE,
+  # includes or excludes arrows on the plot
+  arrows = FALSE,
+  # color points by Month
+  point_color = "Month")
 # plot the PCA you saved above
 p$biplot
 ```
 ~~~
+
+The biplotr package performs PCA using Euclidean distance. As mentioned in the
+[beta diversity](https://github.com/lingyi-owl/jena_workshop/blob/gh-pages/files/Diversity%20metrics.pdf) doc, 
+Euclidean distance based on log-ratio transformed
+abundances is equivalent to Aitchison distance based on untransformed values.
+Aitchison distance is the distance between samples or features within simplex space.
+Right now, we’re interested in looking at how the samples are related based on the
+community matrix. At this time, we’re not necessarily interested in the individual
+ASVs, which is why we excluded the arrows. If you set arrows to TRUE, 1658 arrows will
+appear on the plot, one for each ASV that passed the filtering criteria. We will be
+taking a look at ASVs in the next lessons.
+Our plot isn’t very pretty, so let’s make it nicer! We can also add a way to distinguish
+samples from different fractions in addition to the month divisions. The biplotr
+creates a ggplot2 object, which will make this easy for us. Ggplot2 is very well
+documented, so you should have an easy time looking up any of the commands you
+don’t understand.
 
 ### modify plots
 ~~~
 ```{r}
 # access the PCA plot itself from the saved object
 p$plot_elem$biplot_chart_base +
-# plot the first and second principal components and
-# color the points by month and change the shape to indicate size
-# fraction
-geom_point(aes(x = PC1, y = PC2, color = family, shape = relationship),
-size = 3) +
-# set the colors to the first three values in the Kelly color
-# change the ggplot2 theme
-theme_classic() +
-# change the plot title (to nothing, in this case)
-ggtitle("PCA of clr-transformed abundances")
+  # plot the first and second principal components and
+  # color the points by month and change the shape to indicate size
+  # fraction
+  geom_point(aes(x = PC1, y = PC2, color = Month, shape = Fraction),
+  size = 3) +
+  # set the colors to the first three values in the Kelly color
+  # palette
+  scale_color_manual(values = featuretable:::ft_palette$kelly[1:3]) +
+  # change the ggplot2 theme
+  theme_classic() +
+  # change the plot title (to nothing, in this case)
+  ggtitle("PCA of clr-transformed abundances")
 ```
 ~~~
+
+Samples separate first by month, and then by size
+fraction. PC1, which explains the most variation in the data, seems to be correlated
+with month. November and December are closer to each other than either is to
+October, which corresponds to what we saw in the bar plots. November occurs
+between October and December on PC1, indicating a gradient of change over time.
+The Kelly color palette used above is based on Kenneth Kelly’s 22 colors of maximum
+contrast. It’s a favorite color palette of mine (and the FeatureTable creator) because
+the colors are nice and the first few are color-blind friendly! You can find the hex
+codes and swatches for the Kelly colors (and more palettes) here.
