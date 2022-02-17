@@ -51,12 +51,14 @@ loading all the data separately again.
 ```{r}
 load("pond_featuretable.Rdata")
 ```
+
 Filter ASVs
 As usual, we’ll do some filtering of our ASV table.
+
 ```{r}
-pond_core_25 ≤- pond_ft$core_microbiome(
-min_sample_proportion = 0.25,
-detection_limit = 5)
+pond_core_25 <-  pond_ft$core_microbiome(
+  min_sample_proportion = 0.25,
+  detection_limit = 20)
 print(pond_core_25)
 ```
 ~~~
