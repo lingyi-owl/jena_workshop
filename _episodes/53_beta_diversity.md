@@ -220,3 +220,19 @@ performed the PCA on a distance matrix for the Bray-Curtis plot rather than
 performing PCA on the count table as we did for the Aitchison plot. A PCA performed
 on a distance matrix will always show more variation explained than a PCA performed
 on a count table because there are fewer variables.
+
+#### PCA of UniFrac
+
+Aitchisin and Bray-Curtis distances only take ASV abundance into account. UniFrac
+(Unique Fraction metric) incorporates phylogenetic relatedness and the weighted
+version includes ASV abundance. Unweighted UniFrac only considers ASVs in terms
+of presence/absence. Therefore, unweighted UniFrac is CoDA-compatible, but the
+weighted version is not.
+We'll use the phyloseq package to calculate UniFrac distance. First, we’ll load the
+phyloseq object we made in Alpha Diversity:
+
+```{r}
+load("data/pond_phyloseq.Rdata")
+```
+Now, we’ll use the distance() function to calculate weighted and unweighted
+UniFrac:
