@@ -150,12 +150,38 @@ p$plot_elem$biplot_chart_base +
 ```
 ~~~
 
+>## Discussion: 
+> What do you see from the plot? What does the PCA plot tell you about the microbial community diversity between samples?
+{: .discussion}
+
 Samples separate first by month, and then by size
 fraction. PC1, which explains the most variation in the data, seems to be correlated
-with month. November and December are closer to each other than either is to
-October, which corresponds to what we saw in the bar plots. November occurs
-between October and December on PC1, indicating a gradient of change over time.
-The Kelly color palette used above is based on Kenneth Kelly’s 22 colors of maximum
-contrast. It’s a favorite color palette of mine (and the FeatureTable creator) because
-the colors are nice and the first few are color-blind friendly! You can find the hex
-codes and swatches for the Kelly colors (and more palettes) here.
+with month. November occurs between October and December on PC1, indicating a gradient of change over time.
+
+#### PCA of Bray-Curtis
+Bray-Curtis dissimilarity is a commonly used distance metric in microbial ecology
+literature. Bray-Curtis dissimilarity cannot be calculated with negative values, so we
+will use the raw, untransformed counts to calculate it. Bray-Curtis distance is
+therefore not CoDA friendly, but it's something you'll see a lot and will usually have
+the same general result as an Aitchison distance PCA.
+
+~~~
+```{r}
+# Bray-Curtis can't be performed with negative numbers, so we need the
+# untransformed abundance values
+counts <- pond_ft$core_microbiome(
+  min_sample_proportion = 0.25,
+  detection_limit = 20)$
+  data
+  # calculate Bray-Curtis dissimilarity and turn it into a matrix
+  dist_bc_mat <- vegdist(counts, method = "bray") %>% as.matrix()
+  # use the biplotr package to perform PCA
+  bc_pca <- pca_biplot(data = dist_bc_mat,
+  arrows = FALSE)
+  
+bc_pca$biplot
+```
+~~~
+
+The `vegdist()` command comes from the vegan package and can be used to
+calculate many types of distances (try `?vegdist()`).
