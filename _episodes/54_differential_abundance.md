@@ -76,43 +76,50 @@ once, so we'll have to test some combinations by hand. Luckily, the feature tabl
 makes it really easy to select samples based on metadata.
 
 ~~~
+pond_core_25 <-  pond_ft$core_microbiome(
+  min_sample_proportion = 0.25,
+  detection_limit = 20)
+print(pond_core_25)
+```
 ```{r}
 # October by fraction
-oct_one_ft ≤- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+oct_one_ft  <-  pond_core_25$keep_samples(Fraction == "1um" & Month ==
 "October")
-oct_two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+oct_two_ft <- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
 "October")
 # November by fraction
-nov_one_ft ≤- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+nov_one_ft <- pond_core_25$keep_samples(Fraction == "1um" & Month ==
 "November")
-nov_two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+nov_two_ft <- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
 "November")
 # December by fraction
-dec_one_ft ≤- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+dec_one_ft <- pond_core_25$keep_samples(Fraction == "1um" & Month ==
 "December")
-dec_two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+dec_two_ft <- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
 "December")
 # Fraction
-one_ft ≤- pond_core_25$keep_samples(Fraction == "1um")
-two_ft ≤- pond_core_25$keep_samples(Fraction == "0.2um")
+one_ft <- pond_core_25$keep_samples(Fraction == "1um")
+two_ft <- pond_core_25$keep_samples(Fraction == "0.2um")
 # October
-oct_ft ≤- pond_core_25$keep_samples(Month == "October")
+oct_ft <- pond_core_25$keep_samples(Month == "October")
 # November
-nov_ft ≤- pond_core_25$keep_samples(Month == "November")
+nov_ft <- pond_core_25$keep_samples(Month == "November")
 # December
-dec_ft ≤- pond_core_25$keep_samples(Month == "December")
-```
+dec_ft <- pond_core_25$keep_samples(Month == "December")
+~~~
+
 Let's start by comparing ASV abundances between the size fractions. We'll stick the
 two fraction tables back together, make a conditions vector, and run `ALDEx2`.
+
+~~~
 ```{r, message=FALSE}
 # combine the ASV tables from two fraction feature tables
-fraction ≤- rbind(one_ft$data, two_ft$data)
+fraction <- rbind(one_ft$data, two_ft$data)
 # make a conditions vector so aldex knows which samples belong in each
 # category (there are 12 1 μm samples and 12 0.2 μm samples)
-conds_fraction ≤- c(rep("1um", 12), rep("0.2um", 12))
+conds_fraction <- c(rep("1um", 12), rep("0.2um", 12))
 # run aldex
-aldex_fraction ≤- aldex(t(fraction), # aldex wants samples to be
-columns
+aldex_fraction <- aldex(t(fraction), # aldex wants samples to be columns
 conds_fraction,
 test = "t", # use a t-test for diff. abundance
 effect = TRUE) # calculate ASV effect size
@@ -201,7 +208,7 @@ dim(fraction_effective_asvs) # displays the table dimensions
 ~~~
 
 Looking at the table dimensions, we can see that there are 80 ASVs with an effect size
-≥ 1 or ≤ -1 that would warrant further consideration.
+>= 1 or <= -1 that would warrant further consideration.
 As practice, compare ASVs between months and between size fractions within
 months. For at least one comparison, construct the plots and do the subsetting. For
 Month, you will have to test three combinations: October-November,
