@@ -1,0 +1,4 @@
+Month	Ambient_temp	Water_temp	pH	Dissolved_oxygen	Nitrate	Chloride	Turbidity	Precipitation	Conductivity	Oxidation_reduction
+October	17.2	19.8	7.7	116.4	0.63	13.8	30.2	0	158.9	189.7
+November	12.2	10.9	7.56	96.4	0.26	13.3	9.6	0	160.8	159.8
+December	3.9	7.4	8.08	117.7	0.19	7.9	3.4	0.2	167.1	243.9
