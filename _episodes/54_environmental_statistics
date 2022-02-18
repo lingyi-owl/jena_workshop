@@ -1,5 +1,5 @@
 ---
-title: "Environmental statistics"
+title: "Beta diversity"
 teaching: 60
 exercises: 60
 questions:
@@ -21,8 +21,12 @@ keypoints:
 > - R packages:
   - FeatureTable
   - ggplot2
+  - gridExtra
+  - magrittr
+  - biplotr
   - zCompositions
-  - reshape2
+  - vegan
+  - ggdendro
 {: .prereq}
 
 ## Set up
