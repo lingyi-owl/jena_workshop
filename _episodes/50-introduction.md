@@ -50,3 +50,6 @@ Compositionality
 - propr: An R-package for Identifying Proportionally Abundant Features Using Compositional Data Analysiss [Thomas P. Quinn et al Biostatistics 2022](https://www.nature.com/articles/s41598-017-16520-0)
 {% include links.md %}
 
+## Acknowledgement
+The content and material of the course today is heavily based on the MCAW-EPSCoR Microbial Community Analysis Workshop by Viral Ecology and Informatics Lab in the University of Delaware.
+
