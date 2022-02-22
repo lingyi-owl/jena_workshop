@@ -2,3 +2,21 @@
 Error: package or namespace load failed for ‘phyloseq’ in dyn.load(file, DLLpath = DLLpath, ...):
  unable to load shared object '/mnt/local/prak131/anaconda3/envs/day5_test/lib/R/library/Rcpp/libs/Rcpp.so':
   /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.26' not found (required by /mnt/local/prak131/anaconda3/envs/day5_test/lib/R/library/Rcpp/libs/Rcpp.so)
+
+
+library(ggplot2)
+library(gridExtra)
+library(magrittr)
+library(phyloseq)
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("phyloseq", force=T)
+library(ape)
+library(picante)
+library(reshape2)
+library(zCompositions)
+library(vegan)
+library(ggdendro)
+library(ALDEx2)
+library(DESeq2)
