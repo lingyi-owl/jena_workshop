@@ -7,12 +7,14 @@ Error: package or namespace load failed for ‘phyloseq’ in dyn.load(file, DLL
 library(ggplot2)
 library(gridExtra)
 library(magrittr)
-library(phyloseq)
+
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
 BiocManager::install("phyloseq", force=T)
-library(ape)
+
+
+library(phyloseq)
 library(picante)
 library(reshape2)
 library(zCompositions)
