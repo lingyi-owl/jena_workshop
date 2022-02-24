@@ -103,7 +103,25 @@ R will throw an error if any of the packages are not installed.
 
 #### Download the data
 
-The input data for the workshop today can be found [here](https://github.com/lingyi-owl/jena_workshop/tree/gh-pages/data).Store these data in the directory of Viriomic-Workshop/day5_ecology/data/.
+The input data for the workshop today can be downloaded through github. Store these data in the directory of `day5/data/`.
+It is a microbial 16S dataset from a pond study through a seasonal change period with two size fractions (0.2µm. & 1µm).
+We used this microbial 16S dataset for this workshop because it has enough sequencing depth and sample numbers to conduct ecological analysis.
+The twins phages dataset is not big enough to show variance between samples.
+The principles to study viral ecology and microbial ecology should be the same.
+Thus, you can apply the analysis methods you learned from today's workshop to your viromics data in the future.
+
+~~~
+# asv count table
+wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/asv_count_table.txt
+# taxonomy column table
+wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/taxonomy_columns.txt
+# sample metadata table
+wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/sample_metadata.txt
+# asv tree file
+wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/asv_FastTree.newick
+# environment data by month table
+wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/env_data_by_month.txt
+~~~
 
 #### Load data
 
