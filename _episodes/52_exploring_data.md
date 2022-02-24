@@ -126,7 +126,7 @@ scale_x_discrete(limits=c("October", "November", "December"))
 Make a similar chart for size fraction. Are there possible differences in the microbial
 community based on size fraction?
 
-## Centered-log ratio Abundance
+#### Centered-log ratio Abundance
 We know that we should transform the raw counts to centered-log ratios when dealing with compositional data analysis.
 Now let’s view ASVs in terms of centered-log ratio abundance in the class level and compare the clr abundance distribution with absolute and relative abundance using heatmaps.
 
