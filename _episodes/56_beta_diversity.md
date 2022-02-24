@@ -36,6 +36,9 @@ purely getting a feel for our data.)
 
 ~~~
 ```{r}
+pond_core_phyloseq <- phyloseq_filter_prevalence(pond_phyloseq, prev.trh = 0.1, abund.trh = 10, abund.type = "mean", threshold_condition = "AND")
+print(pond_core_phyloseq) # should have 24 samples and 1842 features
+save(pond_core_phyloseq, file = "data/pond_core_phyloseq.Rdata")
 pond_core_phyloseq_otu_table <- as.data.frame(phyloseq::otu_table(pond_core_phyloseq))
 pond_core_ft <- FeatureTable$new(t(pond_core_phyloseq_otu_table), taxonomy, sample_data)
 print(pond_core_ft)
