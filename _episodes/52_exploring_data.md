@@ -13,102 +13,18 @@ keypoints:
 - "Picking thresholds for filtering can be tricky. Play with the thresholds to filter data based on your questions and your data."
 ---
 
-#### Load data
-
-Before you load the data, make sure that the name of the feature(ASV) column matches in the
-feature(ASV) count table and the taxonomy table. They will not match by default. My labels
-for both are “ASV”
-Load the ASV count table, taxonomy table, and sample metadata using the `read.table()`
-function:
-
-~~~
-```{r}
-# ASV table with raw counts
-counts <- read.table("data/asv_count_table.txt",
-# tells the function that rows are separated by a tab
-sep = "\t",
-# logical confirming that the table already has headers
-header = TRUE,
-# make the first column of the table into row names
-row.names = 1)
-# taxonomy info for the ASVs
-taxonomy <- read.table("data/taxonomy_columns.txt",
-sep = "\t",
-header = TRUE,
-row.names = 1,
-na.strings = c("", "NA"))
-# sample metadata
-sample_data <- read.table("data/sample_metadata.txt",
-sep = "\t",
-header = TRUE,
-row.names = 2)
-```
-~~~
-
-Remember that lines starting with a “#” are comments. You can see here that
-comments can be made within R functions without interfering with running the
-function.
-Also make sure to take note of the file paths: The current working directory of an R
-Notebook is the directory in which the R Notebook is saved. For example, because the
-sample metadata is saved in the directory of "data" in the current working directory, 
-we provide a relative file path beyond the name of the file.
-
 ## Data Overview with FeatureTable
 FeatureTable is an R package designed to hold and manipulate sequencing data.
 FeatureTable makes it very easy to filter data and make abundance plots.
 
-#### Building and accessing a FeatureTable object
-First, let's make a FeatureTable object with our data:
+#### Accessing a FeatureTable object
+
+Load the featuretable object we saved before.
 ~~~
 ```{r}
-pond_ft <- FeatureTable$new(t(counts), taxonomy, sample_data)
-```
-~~~
-This command puts the ASV counts, taxonomy calls, and sample metadata into a
-feature table object, where they can be easily manipulated. The order of the data is
-important here. The `t()` function means "transpose". We used it here
-because FeatureTable expects the rows to be samples and the columns to be features.
-To get a summary of your FeatureTable object, use this command:
-~~~
-print(pond_ft)
-~~~
-
-Your summary should look like this:
-```{r}
-FeatureTable: 
-  data         -- 24 samples, 3796 features
-  feature_data -- 8 covariates
-  sample_data  -- 14 covariates
-```
-Make sure that the dimensions in the summary match correctly to the data! The `data`
-category is the ASV count table, the `feature_data` is the taxonomy, and the `sample_data` is
-the sample metadata.
-You can also access specific pieces of your FeatureTable object using the $:
-
-~~~
-```{r}
-pond_ft$data[1:5,1:5]
-```
-~~~
-
-The above command will show you the first 5 rows and columns of the contig count table. Try
-on your own to view the first 5 rows of the feature_data, then the first 5 columns of the
-sample_data.
-
-#### Saving data
-R objects and other data can be saved as R objects to make them easy to use again
-later. We’re going to save the FeatureTable object now so we don’t have to build it
-again in later analysis.
-~~~
-```r
-save(pond_ft, file = "data/pond_featuretable.Rdata")
-```
-~~~
-`pond_featuretable.Rdata` will be created in whichever directory your R Notebook is
-saved. You can save all types of Rdata, not just FeatureTable objects. It’s especially
-useful in collaboration so you’re not passing several documents back and forth.
-Later, when we want to use the FeatureTable again, use this command:
 load("data/pond_featuretable.Rdata")
+```
+~~~
 
 #### Abundance plots with FeatureTable
 Let's take a quick look at the data before we get started. Here's how you make a
@@ -120,16 +36,6 @@ pond_ft$plot()
 ```
 ~~~
 
-First, let’s talk about the code and then we’ll get to the plot. We used the `$` before to
-access parts of the FeatureTable object, but we can also use it to access functions. It’s
-similar to the `%>%` function from magrittr, in that it feeds the object preceding the `$` to
-the following function. Here, we used the `$` to apply the FeatureTable `plot()` function
-to pond_ft. Keep in mind that the `plot()` function here is not the same as the base R
-`plot()` function. When applied to a FeatureTable object, `$plot()` is actually an alias
-for the function `featuretable.plot()` which is actually a ggplot2 wrapper. You’ll see
-more about the $ operator and FeatureTable functions coming up. The topic is also
-covered in the FeatureTable vignettes.
-
 Onto the plot. First off, the x axis labels aren’t very informative right now. We can
 replace the axis labels with more meaningful names using `scale_x_discrete()`:
 
@@ -138,10 +44,9 @@ replace the axis labels with more meaningful names using `scale_x_discrete()`:
 pond_ft$plot() + scale_x_discrete(labels=pond_ft$sample_data$Sample)
 ```
 ~~~
-{% include links.md %}
 
-The `scale_x_discrete()` function is from ggplot2, which is what featuretable is using to make plots. 
-You’ll see more about this later on. For now, let’s talk about the plot’s appearance. Notice that 
+
+For now, let’s talk about the plot’s appearance. Notice that 
 only 8 ASVs were assigned colors, while the rest were lumped into the “Other” category. The FeatureTable default is to
 highlight only the top 8 most abundant ASVs.The bars are all different heights because they represent raw ASV counts for
 each sample, which makes it hard to see patterns, especially in samples with fewer
@@ -320,3 +225,5 @@ With a detection limit of 20, a lot of ASVs drop out right at the beginning and 
 drop out rate slows. Do you get different patterns if you change the detection limit?
 Try to talk yourself through each part of the code and use the built-in
 help docs and Google to make sense of the parts of the code you don’t understand.
+
+{% include links.md %}
