@@ -37,10 +37,6 @@ keypoints:
   - env data by month table
 {: .prereq}
 
-
-Save your new R script in the same directory as the rest of your workshop materials
-(e.g. Viriomic-Workshop/day5_ecology/).
-
 #### Install environment 
 
 Open the terminal.
@@ -69,7 +65,7 @@ Install the package in RStudio using the scripts below. Skip updates when instal
 ```{r}
 # install featuretable
 install.packages("/path/to/featuretable_0.0.10.tar.gz", repos = NULL)
-install.packages(“remotes”)
+install.packages("remotes")
 library(remotes)
 # install DivNet
 remotes::install_github("adw96/breakaway")
