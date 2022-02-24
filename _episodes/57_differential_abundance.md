@@ -45,7 +45,7 @@ nov_two_ft <- pond_core_ft$keep_samples(Fraction == "0.2um" & Month ==
 # December by fraction
 dec_one_ft <- pond_core_ft$keep_samples(Fraction == "1um" & Month ==
 "December")
-dec_two_ft <- pond_core_ftkeep_samples(Fraction == "0.2um" & Month ==
+dec_two_ft <- pond_core_ft$keep_samples(Fraction == "0.2um" & Month ==
 "December")
 # Fraction
 one_ft <- pond_core_ft$keep_samples(Fraction == "1um")
@@ -94,8 +94,7 @@ Now, let’s make some plots of the data.
 ~~~
 ```{r}
 # plot the results
-par(mfrow=c(1,2)) # a graphical parameter that sets up the following
-plots to line up on one row and in two columns
+par(mfrow=c(1,2)) # a graphical parameter that sets up the following plots to line up on one row and in two columns
 aldex.plot(aldex_fraction, type = "MA") # Bland-Altman style plot
 aldex.plot(aldex_fraction, type = "MW") # Effect plot
 ```
@@ -124,12 +123,11 @@ one.
 
 ~~~
 ```{r}
-aldex_fraction %≥%
+aldex_fraction %>%
 ggplot()+
 geom_point(aes(x = diff.btw,
 y = we.eBH,
-color = ifelse(effect ≥= 1 | effect ≤= -1, "Effect
-size ≥ 1 or ≤ -1", "Effect size ≤ 1 and ≥ -1"))) +
+color = ifelse(effect >= 1 | effect <= -1, "Effect size ≥ 1 or ≤ -1", "Effect size  1 and ≥ -1"))) +
 geom_hline(yintercept = 0.05,
 color = "gray70") +
 scale_color_manual(values = c("black", "red")) +
@@ -151,8 +149,8 @@ If you wanted to identify the ASVs in red in the Volcano plot, you can subset th
 `ALDEx2` table like this:
 ~~~
 ```{r}
-fraction_effective_asvs ≤- subset(aldex_fraction, effect >= 1 | effect
-≤= -1)
+fraction_effective_asvs <- subset(aldex_fraction, effect >= 1 | effect
+<= -1)
 dim(fraction_effective_asvs) # displays the table dimensions
 ```
 ~~~
