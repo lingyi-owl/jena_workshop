@@ -12,22 +12,12 @@ keypoints:
 
 
 #### Load data
-We will use the FeatureTable object we saved earlier for this task.
+We will use the core FeatureTable object we saved earlier for this task.
 ~~~
 ```{r}
-load("pond_featuretable.Rdata")
+load("data/pond_core_featuretable.Rdata")
 ```
 
-Filter ASVs
-As usual, we’ll do some filtering of our ASV table.
-
-```{r}
-pond_core_25 <-  pond_ft$core_microbiome(
-  min_sample_proportion = 0.25,
-  detection_limit = 20)
-print(pond_core_25)
-```
-~~~
 
 ## Differential abundance
 In addition to wondering which ASVs vary in abundance with continuous variables
@@ -41,37 +31,31 @@ Unfortunately, ALDEx2 doesn't currently support testing more than two groups at
 once, so we'll have to test some combinations by hand. Luckily, the feature table
 makes it really easy to select samples based on metadata.
 
-~~~
-pond_core_25 <-  pond_ft$core_microbiome(
-  min_sample_proportion = 0.25,
-  detection_limit = 20)
-print(pond_core_25)
-```
 ```{r}
 # October by fraction
-oct_one_ft  <-  pond_core_25$keep_samples(Fraction == "1um" & Month ==
+oct_one_ft  <-  pond_core_ft$keep_samples(Fraction == "1um" & Month ==
 "October")
-oct_two_ft <- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+oct_two_ft <-pond_core_ft$keep_samples(Fraction == "0.2um" & Month ==
 "October")
 # November by fraction
-nov_one_ft <- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+nov_one_ft <- pond_core_ft$keep_samples(Fraction == "1um" & Month ==
 "November")
-nov_two_ft <- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+nov_two_ft <- pond_core_ft$keep_samples(Fraction == "0.2um" & Month ==
 "November")
 # December by fraction
-dec_one_ft <- pond_core_25$keep_samples(Fraction == "1um" & Month ==
+dec_one_ft <- pond_core_ft$keep_samples(Fraction == "1um" & Month ==
 "December")
-dec_two_ft <- pond_core_25$keep_samples(Fraction == "0.2um" & Month ==
+dec_two_ft <- pond_core_ftkeep_samples(Fraction == "0.2um" & Month ==
 "December")
 # Fraction
-one_ft <- pond_core_25$keep_samples(Fraction == "1um")
-two_ft <- pond_core_25$keep_samples(Fraction == "0.2um")
+one_ft <- pond_core_ft$keep_samples(Fraction == "1um")
+two_ft <- pond_core_ft$keep_samples(Fraction == "0.2um")
 # October
-oct_ft <- pond_core_25$keep_samples(Month == "October")
+oct_ft <- pond_core_ft$keep_samples(Month == "October")
 # November
-nov_ft <- pond_core_25$keep_samples(Month == "November")
+nov_ft <- pond_core_ft$keep_samples(Month == "November")
 # December
-dec_ft <- pond_core_25$keep_samples(Month == "December")
+dec_ft <- pond_core_ft$keep_samples(Month == "December")
 ~~~
 
 Let's start by comparing ASV abundances between the size fractions. We'll stick the
