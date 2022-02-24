@@ -135,7 +135,7 @@ Now let’s view ASVs in terms of centered-log ratio abundance in the class leve
 pond_class_clr <- pond_ft$collapse_features(Class)$replace_zeros(use_cmultRepl = TRUE,
                                               method = "GBM")$clr()$data
 rownames(pond_class_clr) <- pond_class_clr$sample_data$Sample
-clr_heatmap <- Heatmap((pond_class_clr)
+clr_heatmap <- Heatmap(pond_class_clr)
 
 pond_class_absolute <- pond_ft$collapse_features(Class)$data
 rownames(pond_class_absolute) <- pond_ft$sample_data$Sample
