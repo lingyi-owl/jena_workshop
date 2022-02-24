@@ -41,9 +41,7 @@ keypoints:
 Save your new R script in the same directory as the rest of your workshop materials
 (e.g. Viriomic-Workshop/day5_ecology/).
 
-#### Install packages
-
-Installing environment 
+#### Install environment 
 
 Open the terminal.
 Navigate into your working directory in the terminal(e.g. day5/). 
@@ -61,22 +59,23 @@ export LD_LIBRARY_PATH=/mnt/local/prakXXX/anaconda3/envs/day5_env/lib
 rstudio
 ~~~
 
+#### Install extra packages
 
-Installing FeatureTable
+In RStudio interface openned from the previous step, install the packages below.
 
-FeatureTable can be installed using the typical `install.packages()` command, but
-you need to download a file first. Download the latest version [here](https://github.com/mooreryan/featuretable/releases/tag/v0.0.10) (you want the
-tar.gz file). Then, run this command:
+Download the [FeatureTable package](https://github.com/mooreryan/featuretable/releases/tag/v0.0.10) to your working directory.
+Install the package in RStudio using the scripts below.
 ~~~
 ```{r}
 install.packages("/path/to/featuretable_0.0.10.tar.gz", repos = NULL)
+install.packages(“remotes”)
+library(remotes)
+remotes::install_github("adw96/breakaway")
+remotes::install_github("adw96/DivNet")
 ```
 ~~~
 
 #### Load packages
-Create a new R code chunk either using a keyboard shortcut (`Ctrl + Alt + I` or
-MacOS: `Cmd + Option + I`) or the green insert button. Load required packages
-using the `library()` function. Here’s my code block:
 
 ~~~
 ```{r}
