@@ -1,63 +1,60 @@
 ---
-title: "Exploring data"
-teaching: 30
-exercises: 60
+title: "Rstudio set up from Conda environment, package installment and data download"
+teaching: 0
+exercises: 30
 questions:
-- "What are the differences between absulte abundance and relative abundance?"
-- "Why is it necessary to filter out low-abundance features?"
 objectives:
-- "Using R Notebooks."
+- "Create Conda environment from the terminal"
+- "Install few extra R packages"
 - "Loading data and packages into R."
 - "Using the FeatureTable package."
-- "Saving R objects with save()."
-- "Plotting relative abundance."
-- "Filtering ASVs to exclude low-abundance features."
+
 keypoints:
-- "Plot relative abundance plots to get a feeling with the data."
-- "Picking thresholds for filtering can be tricky. Play with the thresholds to filter data based on your questions and your data."
 ---
 
->## Prerequisites: 
-> - Installation of R and RStudio
-  - R version 3.5 or higher is required (current version is 4.1.0)
-> - Intro to R and RStudio ([video](https://youtu.be/lVKMsaWju8w))
-> - Intro to R Notebooks 
+>## Prerequisites:  
 > - R packages:
   - ggplot2
-  - FeatureTable
   - gridExtra
   - Magrittr
-> - Data from pevious workshops:
+  - phyloseq
+  - picante
+  - reshape2
+  - biplotr
+  - zCompositions
+  - vegan
+  - ggdendro
+  - ALDEx2
+  - ComplexHeatmap
+  - FeatureTable 
+  - breakaway
+  - DivNet
+> - Data:
   - ASV abundance table
   - taxonomy table
   - sample metadata table
   - taxonomy phylogenetic tree
+  - env data by month table
 {: .prereq}
 
-## Set up
-#### Set up an R Notebook
-Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
-and add fields for author and date. Here is an example:
 
-~~~
----
-title: "Exploring data"
-author: "Ling-Yi Wu"
-date: "25/02/2022"
-output: html_notebook
----
-~~~
-
-Save your new notebook in the same directory as the rest of your workshop materials
+Save your new R script in the same directory as the rest of your workshop materials
 (e.g. Viriomic-Workshop/day5_ecology/).
 
 #### Install packages
 
-Installing environment
+Installing environment 
+
+Download the environment file from [here](https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/day5_env.txt). 
+Put the file in your working directory(e.g. Viriomic-Workshop/day5_ecology/). Navigate into your working directory in the terminal.
+Create the conda environment using the command lines below explicitely. Note that you should use `--file` instead of `-f` in the first line.
+Export the library using the third line. Replace prakXXX with your own computer ID.
+Next initiate Rstudio from the shell.
 ~~~
-```{r}
-conda create --name myenv --file day5_envs.txt
-```
+conda create --name day5_env --file day5_envs.txt
+conda activate day5_env
+export LD_LIBRARY_PATH=/mnt/local/prakXXX/anaconda3/envs/day5_env/lib
+rstudio
 ~~~
 
 
