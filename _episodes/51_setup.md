@@ -125,6 +125,7 @@ wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/en
 
 #### Load data
 
+We will use a 
 Before you load the data, make sure that the name of the feature(ASV) column matches in the
 feature(ASV) count table and the taxonomy table. They will not match by default. My labels
 for both are “ASV”
