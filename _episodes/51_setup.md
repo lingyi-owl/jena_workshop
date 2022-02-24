@@ -125,9 +125,49 @@ wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/en
 
 #### Load data
 
-We will use a 
+Load data to R. Construct and save a featuretable object and a phyloseq object using the provided data for further usage.
 Before you load the data, make sure that the name of the feature(ASV) column matches in the
 feature(ASV) count table and the taxonomy table. They will not match by default. My labels
 for both are “ASV”
 Load the ASV count table, taxonomy table, and sample metadata using the `read.table()`
 function:
+
+~~~
+```{r}
+# ASV table with raw counts
+counts <- read.table("data/asv_count_table.txt",
+# tells the function that rows are separated by a tab
+sep = "\t",
+# logical confirming that the table already has headers
+header = TRUE,
+# make the first column of the table into row names
+row.names = 1)
+# taxonomy info for the ASVs
+taxonomy <- read.table("data/taxonomy_columns.txt",
+sep = "\t",
+header = TRUE,
+row.names = 1,
+na.strings = c("", "NA"))
+# sample metadata
+sample_data <- read.table("data/sample_metadata.txt",
+sep = "\t",
+header = TRUE,
+row.names = 2)
+# phylogenetic tree of ASVs
+tree <- read_tree("data/asv_FastTree.newick")
+
+# make and save featuretable object
+pond_ft <- FeatureTable$new(t(counts), taxonomy, sample_data)
+print(pond_ft)
+save(pond_ft, file = "data/pond_featuretable.Rdata")
+
+# make and save phyloseq object
+pond_phyloseq <- phyloseq(
+otu_table(counts, taxa_are_rows = T),
+tax_table(as.matrix(taxonomy)),
+sample_data(sample_data),
+phy_tree(tree)
+)
+save(pond_phyloseq, file = "data/pond_phyloseq.Rdata")
+```
+~~~
