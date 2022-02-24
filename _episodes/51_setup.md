@@ -45,12 +45,16 @@ Save your new R script in the same directory as the rest of your workshop materi
 
 Installing environment 
 
-Download the environment file from [here](https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/day5_env.txt). 
-Put the file in your working directory(e.g. Viriomic-Workshop/day5_ecology/). Navigate into your working directory in the terminal.
-Create the conda environment using the command lines below explicitely. Note that you should use `--file` instead of `-f` in the first line.
-Export the library using the third line. Replace prakXXX with your own computer ID.
-Next initiate Rstudio from the shell.
+Open the terminal.
+Navigate into your working directory in the terminal(e.g. day5/). 
+Download the environment file.
+Create the conda environment using the command lines below explicitely. Note that you should use `--file` instead of `-f` in the line of `conda create ...`.
+Activate the environment.
+Export a library into the environment. Replace prakXXX with your own computer ID in the line of `export ...`.
+Initiate Rstudio from the shell.
 ~~~
+cd day5/
+wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/day5_env.txt
 conda create --name day5_env --file day5_envs.txt
 conda activate day5_env
 export LD_LIBRARY_PATH=/mnt/local/prakXXX/anaconda3/envs/day5_env/lib
