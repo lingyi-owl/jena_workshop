@@ -64,7 +64,7 @@ Install the package in RStudio using the scripts below. Skip updates when instal
 ~~~
 ```{r}
 # install featuretable
-install.packages("/path/to/featuretable_0.0.10.tar.gz", repos = NULL)
+install.packages("featuretable_0.0.10.tar.gz", repos = NULL)
 install.packages("remotes")
 library(remotes)
 # install DivNet
