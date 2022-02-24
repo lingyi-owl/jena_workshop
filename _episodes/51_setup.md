@@ -55,11 +55,12 @@ remotes::install_github("mooreryan/biplotr")
 Load packages in the order below to avoid conflicts.
 ~~~
 ```{r}
+library(phyloseq)
+library(breakaway)
 library(DivNet)
 library(ggplot2)
 library(gridExtra)
 library(Magrittr)
-library(phyloseq)
 library(picante)
 library(reshape2)
 library(biplotr)
@@ -67,10 +68,8 @@ library(zCompositions)
 library(vegan)
 library(ggdendro)
 library(ALDEx2)
-library(ComplexHeatmap)
 library(FeatureTable)
-library(breakaway)
-library(ComplexHeatmap
+library(ComplexHeatmap)
 ```
 ~~~
 
