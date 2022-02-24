@@ -64,7 +64,7 @@ rstudio
 In RStudio interface openned from the previous step, install the packages below.
 
 Download the [FeatureTable package](https://github.com/mooreryan/featuretable/releases/tag/v0.0.10) to your working directory.
-Install the package in RStudio using the scripts below.
+Install the package in RStudio using the scripts below. Skip updates when installing `breakaway`. It might take a while to install `breakaway`.
 ~~~
 ```{r}
 install.packages("/path/to/featuretable_0.0.10.tar.gz", repos = NULL)
@@ -79,10 +79,21 @@ remotes::install_github("adw96/DivNet")
 
 ~~~
 ```{r}
-library(featuretable)
 library(ggplot2)
 library(gridExtra)
-library(magrittr)
+library(Magrittr)
+library(phyloseq)
+library(picante)
+library(reshape2)
+library(biplotr)
+library(zCompositions)
+library(vegan)
+library(ggdendro)
+library(ALDEx2)
+library(ComplexHeatmap)
+library(FeatureTable)
+library(breakaway)
+library(DivNet)
 ```
 ~~~
 
