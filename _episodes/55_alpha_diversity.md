@@ -198,9 +198,7 @@ diversity measures (the same values you get by treating the ASV abundances as tr
 counts), but the Monte Carlo estimation allows DivNet to add error bars.
 
 The other downside is that the R version of DivNet has trouble with larger datasets
-(like our pond dataset). Luckily, the DivNet algorithm has also now been
-implemented in Rust by [Ryan Moore](https://www.mooreryan.com), so you can run larger datasets. You
-can find that version of DivNet [here](https://github.com/mooreryan/divnet-rs) and the instructional book [here](https://mooreryan.github.io/divnet-rs-book/).
+(like our pond dataset).
 
 In this walkthrough, we’ll collapse our ASVs by taxonomy so we can run DivNet
 entirely in R. In a real analysis, you would want to run the Rust version DivNet on the
