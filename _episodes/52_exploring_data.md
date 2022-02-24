@@ -6,10 +6,10 @@ questions:
 - "What are the differences between absulte abundance and relative abundance?"
 - "Why is it necessary to filter out low-abundance features?"
 objectives:
-- "Plotting relative abundance."
+- "Plotting absolute abundance, relative abundance and centered-log ratio abundance."
 - "Filtering ASVs to exclude low-abundance features."
 keypoints:
-- "Plot relative abundance plots to get a feeling with the data."
+- "Plot absolute abundance, relative abundance and centered-log ratio abundance plots to see the difference of different abundance measures."
 - "Picking thresholds for filtering can be tricky. Play with the thresholds to filter data based on your questions and your data."
 ---
 
@@ -95,8 +95,6 @@ ylab = "Relative Abundance", # change y axis title label
 axis.text.x = element_text(angle = 0)) # change x axis text angle
 ```
 ~~~
-What’s happening to `pond_ft` in this new code? Try to talk yourself through the
-process before reading further.
 
 First, we collapse the samples in `pond_ft` by month using `collapse_samples()`.
 Then, relative abundance is calculated for each month using `map_samples()`. Finally,
@@ -127,6 +125,33 @@ scale_x_discrete(limits=c("October", "November", "December"))
 
 Make a similar chart for size fraction. Are there possible differences in the microbial
 community based on size fraction?
+
+## Centered-log ratio Abundance
+We know that we should transform the raw counts to centered-log ratios when dealing with compositional data analysis.
+Now let’s view ASVs in terms of centered-log ratio abundance in the class level and compare the clr abundance distribution with absolute and relative abundance using heatmaps.
+
+~~~
+```{r}
+pond_class_clr <- pond_ft$collapse_features(Class)$replace_zeros(use_cmultRepl = TRUE,
+                                              method = "GBM")$clr()$data
+rownames(pond_class_clr) <- pond_class_clr$sample_data$Sample
+clr_heatmap <- Heatmap((pond_class_clr)
+
+pond_class_absolute <- pond_ft$collapse_features(Class)$data
+rownames(pond_class_absolute) <- pond_ft$sample_data$Sample
+absolute_heatmap <- Heatmap(pond_class_absolute)
+
+pond_class_relative <- pond_ft$collapse_features(Class)$map_samples(relative_abundance)$data
+rownames(pond_class_relative) <- pond_ft$sample_data$Sample
+relative_heatmap <- Heatmap(pond_class_relative)
+
+grid.arrange(absolute_heatmap,
+relative_heatmap,
+clr_heatmap,
+ncol = 3)
+```
+~~~
+
 
 ## Filtering ASVs
 
