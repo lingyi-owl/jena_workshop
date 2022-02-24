@@ -1,4 +1,5 @@
 ---
+start: true
 title: "Track alpha and beta diversity dynamics of viral/microbial communities"
 teaching: 30
 exercises: 120
