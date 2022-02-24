@@ -1,0 +1,1 @@
+conda create -n day5_env -c bioconda -c conda-forge r-ggplot2 r-gridextra r-magrittr bioconductor-phyloseq r-picante r-reshape2 r-zcompositions r-vegan r-ggdendro bioconductor-aldex2 bioconductor-complexheatmap bioconductor-aldex2 
