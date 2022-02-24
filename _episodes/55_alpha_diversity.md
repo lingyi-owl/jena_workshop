@@ -1,6 +1,6 @@
 ---
 title: "Alpha diversity"
-teaching: 30
+teaching: 0
 exercises: 60
 questions:
 - "What is alpha diversity?"
@@ -10,85 +10,11 @@ objectives:
 - "Running alpha diversity analysis using phyloseq & DivNet."
 - "Interpreting alpha diversity measures."
 - "Statistical comparison of diversity indices usign hill numbers."
-- "Extracting data from R objects."
-- "Using ggplot2."
 keypoints:
 - "Different alpha diversity indices emphasize on different aspects of alpha diversity. Make choices based on your questions and interpret the results based on the methods you choosed."
 - "Hill numbers are linear and intuitive while original alpha diversicy index values are not."
 ---
 
->## Prerequisites: 
-> - R packages:
-  - phyloseq
-  - ggplot2
-  - gridExtra
-  - Magrittr
-  - picante
-  - DivNet
-  - reshape2
-{: .prereq}
-
-## Set up
-
-#### Set up an R Notebook
-Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
-and add fields for author and date. Save your new notebook in the same directory as
-the rest of your workshop materials (e.g. Viriomic-Workshop/day5_ecology/).
-
-#### Installing packages
-Installing phyloseq
-~~~
-install.packages("BiocManager")
-library(BiocManager)
-BiocManager::install("phyloseq")
-~~~
-
-Installing DivNet
-~~~
-install.packages(“remotes”)
-library(remotes)
-remotes::install_github("adw96/breakaway")
-remotes::install_github("adw96/DivNet")
-~~~
-
-#### Load packages
-Create a new R code chunk and load required packages using library().
-~~~
-```{r}
-library(phyloseq)
-library(ggplot2)
-library(gridExtra)
-library(magrittr)
-library(picante)
-library(featuretable)
-library(DivNet)
-library(reshape2)
-```
-~~~
-#### Load data
-Load the ASV table, taxonomy table, and sample metadata using the read.table()
-function. Use read_tree() to import the phylogenetic tree. We’re loading the data
-again because we will actually be using the phyloseq package to calculate some of
-the diversity metrics
-~~~
-```{r}
-counts <- read.table("data/asv_count_table.txt",
-sep = "\t",
-header = TRUE,
-row.names = 1)
-taxonomy <- read.table("data/taxonomy_columns.txt",
-sep = "\t",
-header = TRUE,
-row.names = 1,
-na.strings = c("", "NA"))
-sample_data <- read.table("data/sample_metadata.txt",
-sep = "\t",
-header = TRUE,
-row.names = 2)
-# phylogenetic tree of bins
-tree <- read_tree("data/asv_FastTree.newick")
-```
-~~~
 
 ## Alpha diversity with phlyloseq
 
@@ -99,20 +25,6 @@ categories).
 The [Diversity Metrics doc](https://github.com/lingyi-owl/jena_workshop/blob/gh-pages/files/Diversity%20metrics.pdf) contains information about all of the diversity indices you’ll
 see coming up, as well as how each index treats richness and evenness. For more
 thorough explanations, there are a lot of good ecology resources out there.
-
-#### Create a phyloseq object
-~~~
-```{r}
-# make and save phyloseq object
-pond_phyloseq <- phyloseq(
-otu_table(counts, taxa_are_rows = T),
-tax_table(as.matrix(taxonomy)),
-sample_data(sample_data),
-phy_tree(tree)
-)
-save(pond_phyloseq, file = "data/pond_phyloseq.Rdata")
-```
-~~~
 
 There is a more thorough breakdown of alpha diversity indices in the Diversity Metrics
 doc, but here's a brief rundown because it's important to know how the indices are
