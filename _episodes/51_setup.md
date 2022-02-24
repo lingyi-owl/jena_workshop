@@ -24,7 +24,7 @@ Initiate Rstudio from the shell.
 ~~~
 cd day5/
 wget https://raw.githubusercontent.com/lingyi-owl/jena_workshop/gh-pages/data/day5_env.txt
-conda create --name day5_env --file day5_envs.txt
+conda create --name day5_env --file day5_env.txt
 conda activate day5_env
 export LD_LIBRARY_PATH=/mnt/local/prakXXX/anaconda3/envs/day5_env/lib
 rstudio
