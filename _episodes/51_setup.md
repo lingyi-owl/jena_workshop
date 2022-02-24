@@ -12,31 +12,6 @@ objectives:
 keypoints:
 ---
 
->## Prerequisites:  
-> - R packages:
-  - ggplot2
-  - gridExtra
-  - Magrittr
-  - phyloseq
-  - picante
-  - reshape2
-  - biplotr
-  - zCompositions
-  - vegan
-  - ggdendro
-  - ALDEx2
-  - ComplexHeatmap
-  - FeatureTable 
-  - breakaway
-  - DivNet
-> - Data:
-  - ASV abundance table
-  - taxonomy table
-  - sample metadata table
-  - taxonomy phylogenetic tree
-  - env data by month table
-{: .prereq}
-
 #### Install environment 
 
 Open the terminal.
