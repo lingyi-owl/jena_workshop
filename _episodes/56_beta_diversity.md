@@ -81,7 +81,7 @@ creates a ggplot2 object, which will make this easy for us. Ggplot2 is very well
 documented, so you should have an easy time looking up any of the commands you
 don’t understand.
 
-### modify plots
+### Modify plots
 ~~~
 ```{r}
 # access the PCA plot itself from the saved object
