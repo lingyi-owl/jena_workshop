@@ -62,12 +62,12 @@ Use the $pca_biplot() command to make a PCA from a FeatureTable object:
 ```{r}
 # perform PCA using the biplotr package and store it as object p
 p <- pond_core_clr$pca_biplot(use_biplotr = TRUE,
-  # give biplotr access to sample metadata
-  include_sample_data = TRUE,
-  # includes or excludes arrows on the plot
-  arrows = FALSE,
-  # color points by Month
-  point_color = "Month")
+# give biplotr access to sample metadata
+include_sample_data = TRUE,
+# includes or excludes arrows on the plot
+arrows = FALSE,
+# color points by Month
+point_color = "Month")
 # plot the PCA you saved above
 p$biplot
 ```
