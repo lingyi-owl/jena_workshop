@@ -67,18 +67,24 @@ Download the [FeatureTable package](https://github.com/mooreryan/featuretable/re
 Install the package in RStudio using the scripts below. Skip updates when installing `breakaway`. It might take a while to install `breakaway`.
 ~~~
 ```{r}
+# install featuretable
 install.packages("/path/to/featuretable_0.0.10.tar.gz", repos = NULL)
 install.packages(“remotes”)
 library(remotes)
+# install DivNet
 remotes::install_github("adw96/breakaway")
 remotes::install_github("adw96/DivNet")
+# install biplotr
+remotes::install_github("mooreryan/biplotr")
 ```
 ~~~
 
 #### Load packages
 
+Load packages in the order below to avoid conflicts.
 ~~~
 ```{r}
+library(DivNet)
 library(ggplot2)
 library(gridExtra)
 library(Magrittr)
@@ -93,7 +99,7 @@ library(ALDEx2)
 library(ComplexHeatmap)
 library(FeatureTable)
 library(breakaway)
-library(DivNet)
+library(ComplexHeatmap
 ```
 ~~~
 
