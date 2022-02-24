@@ -145,10 +145,9 @@ pond_class_relative <- pond_ft$collapse_features(Class)$map_samples(relative_abu
 rownames(pond_class_relative) <- pond_ft$sample_data$Sample
 relative_heatmap <- Heatmap(pond_class_relative)
 
-grid.arrange(absolute_heatmap,
-relative_heatmap,
-clr_heatmap,
-ncol = 3)
+absolute_heatmap
+relative_heatmap
+clr_heatmap
 ```
 ~~~
 
