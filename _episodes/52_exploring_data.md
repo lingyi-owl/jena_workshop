@@ -3,14 +3,11 @@ title: "Exploring data"
 teaching: 0
 exercises: 60
 questions:
-- "What are the differences between absulte abundance and relative abundance?"
-- "Why is it necessary to filter out low-abundance features?"
+- "What are the differences between absulte abundance, relative abundance and centered-log transformed abundance?
 objectives:
 - "Plotting absolute abundance, relative abundance and centered-log ratio abundance."
-- "Filtering ASVs to exclude low-abundance features."
 keypoints:
 - "Plot absolute abundance, relative abundance and centered-log ratio abundance plots to see the difference of different abundance measures."
-- "Picking thresholds for filtering can be tricky. Play with the thresholds to filter data based on your questions and your data."
 ---
 
 ## Data Overview with FeatureTable
@@ -154,102 +151,5 @@ clr_heatmap
 > What do you see from the plot? Do you see an advantage of using clr abundance?
 {: .discussion}
 
-## Filtering ASVs
-
-Filtering is important because low abundance ASVs (e.g. singletons, doubletons) are
-more likely than high abundance ASVs to be the result of sequencing errors and are
-often "noise". ASVs are more robust to this than OTUs, but are still not perfect.
-Additionally, unfiltered ASV and OTU tables are sparse (i.e. they contain many zeros),
-which is not ideal for most statistics; It is hard to compare samples based on ASVs that
-appear in only a few samples.
-FeatureTable makes filtering very easy. First, let’s remove ASVs that are in fewer than
-25% of samples (0.25 * 24 = 6) or that have a raw count below 20.
-
-~~~
-```{r}
-pond_core_25 <- pond_ft$core_microbiome(
-min_sample_proportion = 0.25,
-detection_limit = 20)
-```
-~~~
-
-Here we used `core_microbiome()` to do the filtering and stored the filtered data as a
-new FeatureTable object. To check on the new feature table and see the results of the
-filtering run:
-
-~~~
-print(pond_core_25) # should have 24 samples and 1658 features
-~~~
-
-#### Exploring the core microbiome
-
-In the above examples, I picked 5 for the detection limit (i.e. an ASV with a count of
-less than 5 will be removed), but it's an arbitrary cutoff. That being said, any detection
-limit is generally arbitrary. The minimum sample proportion is also fairly arbitrary. I
-picked it because it was small enough not to exclude an entire month or size fraction
-from analysis, but also big enough to filter out rarer OTUs.
-Normally, you'd probably want to fiddle around with the detection limit and
-minimum sample proportion and see if the data changes too much. You can do that
-a bit in the next block of code.
-
-~~~
-```{r}
-# Set the detection limit required for each ASV to be included
-detection_limit <- 20
-# Set a range sample proportions required for each ASV to be included
-# This will make an array of sample proportions (proportion of samples
-# that an ASV must appear in to be included)
-# starting with 10% and moving up to 100% by increments of 10%
-proportions <- seq(from = 0.1, to = 1, by = 0.1)
-# Get the number of remaining ASVs after filtering out ASVs that don't
-# meet the detection limit and sample proportion requirements.
-core_feature_counts <- sapply(proportions, function(sample_proportion)
-{
-pond_ft$
-core_microbiome(detection_limit = detection_limit,
-min_sample_proportion = sample_proportion)$
-num_features()
-})
-# You can also capture what is sort of like the "rare" microbiome
-# This one holds all the ASVs that drop out
-anti_core_feature_counts <- sapply(proportions,
-function(sample_proportion) {
-pond_ft$
-core_microbiome(detection_limit = detection_limit,
-max_sample_proportion = sample_proportion)$
-num_features()
-})
-# Put everything into a single data frame for plotting
-core_plot_data <- data.frame(
-sample_proportion = proportions * 100,
-core_features = core_feature_counts,
-anti_core_features = anti_core_feature_counts
-)
-# Plot!
-# core microbiome
-core <- core_plot_data %>%
-ggplot(aes(x = sample_proportion, y = core_features)) +
-geom_point() +
-ggtitle("Core microbiome") +
-xlab("Min. Sample %") +
-ylab("Number of Features") +
-theme_bw()
-# "rare" microbiome
-rare <- core_plot_data %>%
-ggplot(aes(x = sample_proportion, y = anti_core_features)) +
-geom_point() +
-ggtitle("Rare microbiome") +
-xlab("Max Sample %") +
-ylab("Number of Features") +
-theme_bw()
-# put the two graphs next to each other in the same window
-grid.arrange(core, rare, ncol = 2)
-```
-~~~
-
-With a detection limit of 20, a lot of ASVs drop out right at the beginning and then the
-drop out rate slows. Do you get different patterns if you change the detection limit?
-Try to talk yourself through each part of the code and use the built-in
-help docs and Google to make sense of the parts of the code you don’t understand.
 
 {% include links.md %}
