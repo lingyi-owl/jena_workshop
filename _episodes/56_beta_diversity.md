@@ -36,14 +36,18 @@ purely getting a feel for our data.)
 
 ~~~
 ```{r}
-pond_clr <- pond_ft$core_microbiome(
-  min_sample_proportion = 0.25,
-  detection_limit = 20)$
+pond_core_phyloseq_otu_table <- as.data.frame(phyloseq::otu_table(pond_core_phyloseq))
+pond_core_ft <- FeatureTable$new(t(pond_core_phyloseq_otu_table), taxonomy, sample_data)
+print(pond_core_ft)
+save(pond_core_ft, file = "data/pond_core_featuretable.Rdata")
+
+pond_core_clr <- pond_core_ft$
   # Replace zeros with zCompositions cmultRepl GBM method
   replace_zeros(use_cmultRepl = TRUE,
   method = "GBM")$
   # Then take CLR with base 2
   clr()
+
 ```
 ~~~
 
