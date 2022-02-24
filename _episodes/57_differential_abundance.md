@@ -1,52 +1,18 @@
 ---
 title: "Differential abundance"
-teaching: 60
+teaching: 0
 exercises: 60
 questions:
 - "Which features vary in abundance with categorical variables?"
 objectives:
 - "use ALDEx2 and ANCOM to perform differential abundance analysis."
 keypoints:
-- "Use clr transformation to normalize the data"
+- "Use clr transformation to transform the data"
 ---
 
->## Prerequisites: 
-> - R packages:
-  - FeatureTable
-  - ALDEx2
-  - ggplot2
-  - magrittr
-{: .prereq}
-
-## Set up
-#### Set up an R Notebook
-Open RStudio and create a new R Notebook. Rename the notebook in the “title” field
-and add fields for author and date. Save your new notebook in the same directory as
-the rest of your workshop materials (e.g. Viriomic-Workshop/day5_ecology/).
-
-#### Installing packages
-Installing ALDEx2
-~~~
-```{r}
-library(devtools)
-devtools::install_github("ggloor/ALDEx_bioc")
-```
-~~~
-
-#### Load packages
-Create a new R code chunk and load required packages using library().
-~~~
-```{r}
-library(ALDEx2)
-library(ggplot2)
-library(featuretable)
-library(magrittr)
-```
-~~~
 
 #### Load data
-We saved the whole FeatureTable object earlier, so we can just load that instead of
-loading all the data separately again.
+We will use the FeatureTable object we saved earlier for this task.
 ~~~
 ```{r}
 load("pond_featuretable.Rdata")
