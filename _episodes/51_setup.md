@@ -68,7 +68,7 @@ library(zCompositions)
 library(vegan)
 library(ggdendro)
 library(ALDEx2)
-library(FeatureTable)
+library(featuretable)
 library(ComplexHeatmap)
 ```
 ~~~
